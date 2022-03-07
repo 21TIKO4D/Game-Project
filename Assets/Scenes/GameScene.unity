@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 308000140}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,7 +176,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 7
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1130,6 +1130,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1151871893564203382, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 308000141}
+    - target: {fileID: 1151871893564203382, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 308000141}
     - target: {fileID: 1151871893564203383, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
       propertyPath: m_Name
       value: SnakeManager

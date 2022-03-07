@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class SnakeManager : MonoBehaviour
 {
-
     [SerializeField] float distanceBetween = 0.2f;
     [SerializeField] float speed = 280;
     [SerializeField] float turnSpeed = 180;
@@ -12,12 +11,14 @@ public class SnakeManager : MonoBehaviour
     List<GameObject> snakeBody = new List<GameObject>();
 
     private float moveInputHorizontal;
-
     float countUp = 0;
+    private Camera mainCamera;
+    private float cameraZoomsLeft = 0f;
 
     // Start is called before the first frame update
     private void Start()
     {
+        mainCamera = Camera.main;
         CreateBodyParts();
     }
 
@@ -29,6 +30,10 @@ public class SnakeManager : MonoBehaviour
             CreateBodyParts();
         }
         SnakeMovement();
+        if (cameraZoomsLeft > 0.01) {
+            mainCamera.orthographicSize += Time.deltaTime / 2;
+            cameraZoomsLeft -= Time.deltaTime / 2;
+        }
     }
 
     private void OnMove(InputAction.CallbackContext callbackContext)
@@ -38,7 +43,11 @@ public class SnakeManager : MonoBehaviour
 
     private void SnakeMovement()
     {
-        snakeBody[0].GetComponent<Rigidbody2D>().velocity = snakeBody[0].transform.right * speed * Time.deltaTime;
+        Vector2 headMove = snakeBody[0].transform.right * speed * Time.deltaTime;
+        snakeBody[0].GetComponent<Rigidbody2D>().velocity = headMove;
+
+        Vector3 cameraPos = new Vector3(snakeBody[0].transform.position.x, snakeBody[0].transform.position.y, -10);
+        mainCamera.transform.position = cameraPos;
         if (moveInputHorizontal != 0)
         {
             snakeBody[0].transform.Rotate(new Vector3(0, 0, -turnSpeed * Time.deltaTime * moveInputHorizontal));
@@ -84,5 +93,6 @@ public class SnakeManager : MonoBehaviour
     public void Grow()
     {
         bodyParts.Add(snakeBody[snakeBody.Count - 1]);
+        cameraZoomsLeft = 0.2f;
     }
 }
