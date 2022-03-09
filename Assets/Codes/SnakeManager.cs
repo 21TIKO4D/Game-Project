@@ -7,8 +7,9 @@ public class SnakeManager : MonoBehaviour
     [SerializeField] float distanceBetween = 0.2f;
     [SerializeField] float speed = 280;
     [SerializeField] float turnSpeed = 180;
+    [SerializeField] GameObject animalCarriage;
     [SerializeField] List<GameObject> bodyParts = new List<GameObject>();
-    List<GameObject> snakeBody = new List<GameObject>();
+    List<GameObject> trainParts = new List<GameObject>();
 
     private float moveInputHorizontal;
     float countUp = 0;
@@ -43,23 +44,23 @@ public class SnakeManager : MonoBehaviour
 
     private void SnakeMovement()
     {
-        Vector2 headMove = snakeBody[0].transform.right * speed * Time.deltaTime;
-        snakeBody[0].GetComponent<Rigidbody2D>().velocity = headMove;
+        Vector2 headMove = trainParts[0].transform.right * speed * Time.deltaTime;
+        trainParts[0].GetComponent<Rigidbody2D>().velocity = headMove;
 
-        Vector3 cameraPos = new Vector3(snakeBody[0].transform.position.x, snakeBody[0].transform.position.y, -10);
+        Vector3 cameraPos = new Vector3(trainParts[0].transform.position.x, trainParts[0].transform.position.y, -10);
         mainCamera.transform.position = cameraPos;
         if (moveInputHorizontal != 0)
         {
-            snakeBody[0].transform.Rotate(new Vector3(0, 0, -turnSpeed * Time.deltaTime * moveInputHorizontal));
+            trainParts[0].transform.Rotate(new Vector3(0, 0, -turnSpeed * Time.deltaTime * moveInputHorizontal));
         }
 
-        if (snakeBody.Count > 1)
+        if (trainParts.Count > 1)
         {
-            for (int i = 1; i < snakeBody.Count; i++)
+            for (int i = 1; i < trainParts.Count; i++)
             {
-                MarkerManager markM = snakeBody[i - 1].GetComponent<MarkerManager>();
-                snakeBody[i].transform.position = markM.markerList[0].position;
-                snakeBody[i].transform.rotation = markM.markerList[0].rotation;
+                MarkerManager markM = trainParts[i - 1].GetComponent<MarkerManager>();
+                trainParts[i].transform.position = markM.markerList[0].position;
+                trainParts[i].transform.rotation = markM.markerList[0].rotation;
                 markM.markerList.RemoveAt(0);
             }
         }
@@ -67,14 +68,14 @@ public class SnakeManager : MonoBehaviour
 
     void CreateBodyParts()
     {
-        if (snakeBody.Count == 0)
+        if (trainParts.Count == 0)
         {
             GameObject temp1 = Instantiate(bodyParts[0], transform.position, transform.rotation, transform);
-            snakeBody.Add(temp1);
+            trainParts.Add(temp1);
             bodyParts.RemoveAt(0);
         }
 
-        MarkerManager markM = snakeBody[snakeBody.Count -1].GetComponent<MarkerManager>();
+        MarkerManager markM = trainParts[trainParts.Count -1].GetComponent<MarkerManager>();
         if (countUp == 0)
         {
             markM.ClearMarkerList();
@@ -82,17 +83,26 @@ public class SnakeManager : MonoBehaviour
         countUp += Time.deltaTime;
         if (countUp >= distanceBetween)
         {
-            GameObject temp = Instantiate(bodyParts[0], markM.markerList[0].position, markM.markerList[0].rotation, transform);
-            snakeBody.Add(temp);
+            GameObject temp = Instantiate(animalCarriage, markM.markerList[0].position, markM.markerList[0].rotation, transform);
+            trainParts.Add(temp);
             bodyParts.RemoveAt(0);
             temp.GetComponent<MarkerManager>().ClearMarkerList();
             countUp = 0;
         }
     }
 
+    public void ClearAnimals()
+    {
+        for (int i = 1; i < trainParts.Count; i++)
+        {
+            Destroy(trainParts[i]);
+        }
+        trainParts.RemoveRange(1, trainParts.Count - 1);
+    }
+
     public void Grow()
     {
-        bodyParts.Add(snakeBody[snakeBody.Count - 1]);
+        bodyParts.Add(trainParts[trainParts.Count - 1]);
         cameraZoomsLeft = 0.2f;
     }
 }

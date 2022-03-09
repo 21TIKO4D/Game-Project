@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Animal
+  - Station
   layers:
   - Default
   - TransparentFX

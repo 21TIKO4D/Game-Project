@@ -61,7 +61,7 @@ MonoBehaviour:
   distanceBetween: 0.28
   speed: 170
   turnSpeed: 140
+  animalCarriage: {fileID: 4726879341727194386, guid: 9a59408f5df9c4f49bbe0ec9231057cd, type: 3}
   bodyParts:
   - {fileID: 4726879341727194386, guid: a20ea67b69b1572478630ab80ef547fd, type: 3}
-  - {fileID: 4726879341727194386, guid: 9a59408f5df9c4f49bbe0ec9231057cd, type: 3}
   - {fileID: 4726879341727194386, guid: 9a59408f5df9c4f49bbe0ec9231057cd, type: 3}
