@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class SnakeManager : MonoBehaviour
 {
     [SerializeField] float distanceBetween = 0.2f;
+
+    [SerializeField] private float smoothTime = 0.2f;
     [SerializeField] float speed = 280;
     [SerializeField] float turnSpeed = 180;
     [SerializeField] GameObject animalCarriage;
@@ -12,9 +14,11 @@ public class SnakeManager : MonoBehaviour
     List<GameObject> trainParts = new List<GameObject>();
 
     private float moveInputHorizontal;
-    float countUp = 0;
-    private Camera mainCamera;
     private float cameraZoomsLeft = 0f;
+    private float countUp = 0;
+    private Camera mainCamera;
+    
+    private Vector3 velocity;
 
     // Start is called before the first frame update
     private void Start()
@@ -44,14 +48,16 @@ public class SnakeManager : MonoBehaviour
 
     private void SnakeMovement()
     {
-        Vector2 headMove = trainParts[0].transform.right * speed * Time.deltaTime;
+        Vector2 headMove = trainParts[0].transform.up * speed * Time.deltaTime;
         trainParts[0].GetComponent<Rigidbody2D>().velocity = headMove;
+        
+        Vector3 targetPosition = trainParts[0].GetComponent<Transform>().TransformPoint(new Vector3(0, 0, -10));
+        mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, targetPosition, ref velocity, smoothTime);
 
-        Vector3 cameraPos = new Vector3(trainParts[0].transform.position.x, trainParts[0].transform.position.y, -10);
-        mainCamera.transform.position = cameraPos;
         if (moveInputHorizontal != 0)
         {
             trainParts[0].transform.Rotate(new Vector3(0, 0, -turnSpeed * Time.deltaTime * moveInputHorizontal));
+            mainCamera.transform.rotation = trainParts[0].transform.rotation;
         }
 
         if (trainParts.Count > 1)
