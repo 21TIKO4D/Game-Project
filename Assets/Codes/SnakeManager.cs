@@ -1,12 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class SnakeManager : MonoBehaviour
 {
+    public enum DirectionState
+    {
+        Left,
+        Forward,
+        Right
+    }
+    public DirectionState currentDirection = DirectionState.Forward;
+
     [SerializeField] float distanceBetween = 0.2f;
 
-    [SerializeField] private float smoothTime = 0.2f;
+    [SerializeField] float smoothTime = 0.2f;
     [SerializeField] float speed = 280;
     [SerializeField] float turnSpeed = 180;
     [SerializeField] GameObject animalCarriage;
@@ -39,11 +46,28 @@ public class SnakeManager : MonoBehaviour
             mainCamera.orthographicSize += Time.deltaTime / 2;
             cameraZoomsLeft -= Time.deltaTime / 2;
         }
+        Debug.Log(currentDirection);
     }
 
-    private void OnMove(InputAction.CallbackContext callbackContext)
+    public void OnUIArrowPointerDown(string direction)
     {
-        this.moveInputHorizontal = callbackContext.ReadValue<Vector2>().x;
+        switch (direction.ToLower())
+        {
+            case "left":
+                currentDirection = DirectionState.Left;
+                moveInputHorizontal = -0.5f;
+                break;
+            case "right":
+                currentDirection = DirectionState.Right;
+                moveInputHorizontal = 0.5f;
+                break;
+        }
+    }
+
+    public void OnUIArrowPointerUp()
+    {
+        currentDirection = DirectionState.Forward;
+        moveInputHorizontal = 0;
     }
 
     private void SnakeMovement()
