@@ -133,14 +133,18 @@ PrefabInstance:
     - target: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: snakeManager
       value: 
-      objectReference: {fileID: 1723268075}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
+      propertyPath: trainManager
+      value: 
+      objectReference: {fileID: 200517940}
     - target: {fileID: 3639529955852305728, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_Name
       value: Animal (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3639529955852305732, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3639529955852305732, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -194,7 +198,11 @@ PrefabInstance:
     - target: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: snakeManager
       value: 
-      objectReference: {fileID: 1723268075}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
+      propertyPath: trainManager
+      value: 
+      objectReference: {fileID: 200517940}
     - target: {fileID: 3639529955852305728, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_Name
       value: Animal
@@ -245,6 +253,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
+--- !u!114 &200517940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+  m_PrefabInstance: {fileID: 1943638100}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a256408d339204c4ebea505e6b0a8068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &216551065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -255,14 +274,18 @@ PrefabInstance:
     - target: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: snakeManager
       value: 
-      objectReference: {fileID: 1723268075}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
+      propertyPath: trainManager
+      value: 
+      objectReference: {fileID: 200517940}
     - target: {fileID: 3639529955852305728, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_Name
       value: Animal (3)
       objectReference: {fileID: 0}
     - target: {fileID: 3639529955852305732, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3639529955852305732, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -444,8 +467,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1723268075}
-          m_TargetAssemblyTypeName: SnakeManager, Assembly-CSharp
+        - m_Target: {fileID: 200517940}
+          m_TargetAssemblyTypeName: TrainManager, Assembly-CSharp
           m_MethodName: OnUIArrowPointerDown
           m_Mode: 5
           m_Arguments:
@@ -460,8 +483,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1723268075}
-          m_TargetAssemblyTypeName: SnakeManager, Assembly-CSharp
+        - m_Target: {fileID: 200517940}
+          m_TargetAssemblyTypeName: TrainManager, Assembly-CSharp
           m_MethodName: OnUIArrowPointerUp
           m_Mode: 1
           m_Arguments:
@@ -628,7 +651,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &643986469
 GameObject:
@@ -661,7 +684,7 @@ Transform:
   m_LocalScale: {x: 61, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &643986471
 SpriteRenderer:
@@ -792,7 +815,7 @@ Transform:
   m_LocalScale: {x: 1, y: 40, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &683389444
 SpriteRenderer:
@@ -902,14 +925,18 @@ PrefabInstance:
     - target: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: snakeManager
       value: 
-      objectReference: {fileID: 1723268075}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
+      propertyPath: trainManager
+      value: 
+      objectReference: {fileID: 200517940}
     - target: {fileID: 3639529955852305728, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_Name
       value: Animal (2)
       objectReference: {fileID: 0}
     - target: {fileID: 3639529955852305732, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3639529955852305732, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1166,7 +1193,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1049921449
 MonoBehaviour:
@@ -1180,7 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088a8bfb3fdcab441b57b5a09d2751fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeManager: {fileID: 1723268075}
+  trainManager: {fileID: 200517940}
 --- !u!61 &1049921450
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1476,8 +1503,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1723268075}
-          m_TargetAssemblyTypeName: SnakeManager, Assembly-CSharp
+        - m_Target: {fileID: 200517940}
+          m_TargetAssemblyTypeName: TrainManager, Assembly-CSharp
           m_MethodName: OnUIArrowPointerDown
           m_Mode: 5
           m_Arguments:
@@ -1492,8 +1519,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1723268075}
-          m_TargetAssemblyTypeName: SnakeManager, Assembly-CSharp
+        - m_Target: {fileID: 200517940}
+          m_TargetAssemblyTypeName: TrainManager, Assembly-CSharp
           m_MethodName: OnUIArrowPointerUp
           m_Mode: 1
           m_Arguments:
@@ -1609,17 +1636,6 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: d794edf32fa717b45acb6d9eff5fda57, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d646286d9d5b14ca8e3fb9c86782b9, type: 3}
---- !u!114 &1723268075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1151871893564203382, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
-  m_PrefabInstance: {fileID: 1151871891977296541}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd68a69ffd356944e95d93a960963620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1765096377 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3663114582025890885, guid: 80d646286d9d5b14ca8e3fb9c86782b9, type: 3}
@@ -1720,79 +1736,67 @@ RectTransform:
   - {fileID: 1151463517}
   - {fileID: 241458407}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &1151871891977296541
+--- !u!1001 &1943638100
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: -7
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203377, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095110, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203382, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 308000141}
-    - target: {fileID: 1151871893564203382, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 308000141}
-    - target: {fileID: 1151871893564203382, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
-      propertyPath: distanceBetween
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1151871893564203383, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+    - target: {fileID: 8318276038991095112, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: m_Name
-      value: SnakeManager
+      value: TrainManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4e8443e77e1821142adb2d723599befd, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}

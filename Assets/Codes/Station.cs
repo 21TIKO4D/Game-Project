@@ -5,12 +5,12 @@ using UnityEngine;
 public class Station : MonoBehaviour
 {
     [SerializeField]
-    SnakeManager snakeManager;
+    TrainManager trainManager;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player")) {
-            snakeManager.ClearAnimals();
+            trainManager.ClearAnimals();
         }
     }
 }

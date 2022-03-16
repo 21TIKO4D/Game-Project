@@ -1,18 +1,15 @@
 ﻿using UnityEngine;
 
 
-namespace PeliExample
+public class Animal : MonoBehaviour
 {
-    public class Animal : MonoBehaviour
-    {
-        public SnakeManager snakeManager;
+    public TrainManager trainManager;
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.gameObject.CompareTag("Player")) {
-                snakeManager.Grow();
-                Destroy(this.gameObject);
-            }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player")) {
+            trainManager.Grow();
+            Destroy(this.gameObject);
         }
     }
 }
