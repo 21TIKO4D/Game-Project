@@ -1798,5 +1798,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: speed
+      value: 280
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}

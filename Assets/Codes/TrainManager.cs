@@ -15,25 +15,49 @@ public class TrainManager : MonoBehaviour
 
     private float cameraZoomsLeft = 0f;
     private float moveInputHorizontal;
+    private int markersBetweenParts = 19;
+    private List<Marker> markerList = new List<Marker>();
+    private List<GameObject> trainCars = new List<GameObject>();
     private Camera mainCamera;
     private GameObject locomotive;
     private Vector3 velocity;
 
     private void Start()
     {
+        markerList.Clear();
         mainCamera = Camera.main;
         locomotive = Instantiate(locomotivePrefab, transform.position, transform.rotation, transform);
+        markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
     }
 
     private void FixedUpdate()
     {
         TrainMovement();
-        Debug.Log("update: " + cameraZoomsLeft + " - " + this.GetInstanceID().ToString());
         if (cameraZoomsLeft > 0.01f) {
             mainCamera.orthographicSize += Time.deltaTime / 2;
             cameraZoomsLeft -= Time.deltaTime / 2;
         }
+
+        if (markerList.Count > (markersBetweenParts * trainCars.Count + markersBetweenParts))
+        {
+            markerList.Remove(markerList[0]);
+        }
+        markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
     }
+
+    /*private void Update()
+    {
+        if (Vector3.Distance(locomotive.transform.position, markerList[markerList.Count - 1].position) > markersDistance)
+        {
+            Debug.Log("new distance: " + Vector3.Distance(locomotive.transform.position, markerList[markerList.Count - 1].position));
+            markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
+        }
+
+        if (markerList.Count > (markersBetweenParts * trainCars.Count + markersBetweenParts))
+        {
+            markerList.Remove(markerList[0]);
+        }
+    }*/
 
     public void OnUIArrowPointerDown(string direction)
     {
@@ -55,12 +79,20 @@ public class TrainManager : MonoBehaviour
 
     public void ClearAnimals()
     {
+        for (int i = 0; i < trainCars.Count; i++)
+        {
+            Destroy(trainCars[i]);
+        }
+        
+        markerList.RemoveRange(0, trainCars.Count * markersBetweenParts);
+        trainCars.Clear();
     }
 
     public void Grow()
     {
+        GameObject trainCar = Instantiate(trainCarPrefab, markerList[markerList.Count - 1].position, markerList[markerList.Count - 1].rotation, transform);
+        trainCars.Add(trainCar);
         cameraZoomsLeft = 0.3f;
-        Debug.Log("Grow " + cameraZoomsLeft + " - " + this.GetInstanceID().ToString());
     }
 
     private void TrainMovement()
@@ -75,6 +107,24 @@ public class TrainManager : MonoBehaviour
         {
             locomotive.transform.Rotate(new Vector3(0, 0, -turnSpeed * Time.deltaTime * moveInputHorizontal));
             mainCamera.transform.rotation = locomotive.transform.rotation;
+        }
+
+        for (int i = 0; i < trainCars.Count; i++)
+        {
+            trainCars[i].transform.position = markerList[markersBetweenParts * (i + 1) - 1].position;
+            trainCars[i].transform.rotation = markerList[markersBetweenParts * (i + 1) - 1].rotation;
+        }
+    }
+
+    public class Marker
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+
+        public Marker(Vector3 pos, Quaternion rot)
+        {
+            position = pos;
+            rotation = rot;
         }
     }
 }

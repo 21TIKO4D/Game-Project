@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a256408d339204c4ebea505e6b0a8068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  markersBetweenParts: 20
   speed: 280
   turnSpeed: 170
   locomotivePrefab: {fileID: 4726879341727194386, guid: a20ea67b69b1572478630ab80ef547fd, type: 3}
