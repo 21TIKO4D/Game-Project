@@ -94,7 +94,7 @@ public class TrainManager : MonoBehaviour
     {
         GameObject trainCar = Instantiate(trainCarPrefab, markerList[markerList.Count - 1].position, markerList[markerList.Count - 1].rotation, transform);
         trainCars.Add(trainCar);
-        cameraZoomsLeft = 0.3f;
+        cameraZoomsLeft = 0.35f;
     }
 
     private void TrainMovement()
@@ -103,7 +103,7 @@ public class TrainManager : MonoBehaviour
         locomotive.GetComponent<Rigidbody2D>().velocity = movement;
         fuelBar.DecreaseFuel(movement.sqrMagnitude * Time.deltaTime / 40);
         
-        Vector3 targetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 0, -10));
+        Vector3 targetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
         mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, targetPosition, ref velocity, 0.2f);
 
         if (moveInputHorizontal != 0)
