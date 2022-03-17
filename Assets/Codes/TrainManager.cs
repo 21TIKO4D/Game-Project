@@ -7,11 +7,12 @@ public class TrainManager : MonoBehaviour
     private float speed = 280;
     [SerializeField] 
     private float turnSpeed = 170;
-
     [SerializeField]
     private GameObject locomotivePrefab;
     [SerializeField]
     private GameObject trainCarPrefab;
+    [SerializeField]
+    private FuelBar fuelBar;
 
     private float cameraZoomsLeft = 0f;
     private float moveInputHorizontal;
@@ -28,6 +29,7 @@ public class TrainManager : MonoBehaviour
         mainCamera = Camera.main;
         locomotive = Instantiate(locomotivePrefab, transform.position, transform.rotation, transform);
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
+        fuelBar.SetMaxFuel(50);
     }
 
     private void FixedUpdate()
@@ -99,6 +101,7 @@ public class TrainManager : MonoBehaviour
     {
         Vector2 movement = locomotive.transform.up * speed * Time.deltaTime;
         locomotive.GetComponent<Rigidbody2D>().velocity = movement;
+        fuelBar.DecreaseFuel(movement.sqrMagnitude * Time.deltaTime / 40);
         
         Vector3 targetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 0, -10));
         mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, targetPosition, ref velocity, 0.2f);
