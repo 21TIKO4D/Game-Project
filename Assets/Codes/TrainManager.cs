@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TrainManager : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class TrainManager : MonoBehaviour
     [SerializeField] 
     private float turnSpeed = 170;
     [SerializeField]
+    private TMP_Text countText;
+    [SerializeField]
+    private FuelBar fuelBar;
+    [SerializeField]
     private GameObject locomotivePrefab;
     [SerializeField]
     private GameObject trainCarPrefab;
-    [SerializeField]
-    private FuelBar fuelBar;
 
     private float cameraZoomsLeft = 0f;
     private float moveInputHorizontal;
@@ -83,6 +86,7 @@ public class TrainManager : MonoBehaviour
         GameObject trainCar = Instantiate(trainCarPrefab, markerList[markerList.Count - 1].position, markerList[markerList.Count - 1].rotation, transform);
         trainCars.Add(trainCar);
         cameraZoomsLeft = 0.35f;
+        countText.text = trainCars.Count.ToString();
     }
 
     private void TrainMovement()
