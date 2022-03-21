@@ -4,11 +4,11 @@ using UnityEngine.UI;
 public class FuelBar : MonoBehaviour
 {
 	[SerializeField]
-	private Slider slider;
-	[SerializeField]
 	private Gradient gradient;
 	[SerializeField]
 	private Image fill;
+	[SerializeField]
+	private Slider slider;
 
 	public void SetMaxFuel(int fuel)
 	{

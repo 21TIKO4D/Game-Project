@@ -21,6 +21,8 @@ public class TrainManager : MonoBehaviour
     private List<GameObject> trainCars = new List<GameObject>();
     private Camera mainCamera;
     private GameObject locomotive;
+    private Vector2 movement;
+    private Vector3 camTargetPosition;
     private Vector3 velocity;
 
     private void Start()
@@ -46,20 +48,6 @@ public class TrainManager : MonoBehaviour
         }
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
     }
-
-    /*private void Update()
-    {
-        if (Vector3.Distance(locomotive.transform.position, markerList[markerList.Count - 1].position) > markersDistance)
-        {
-            Debug.Log("new distance: " + Vector3.Distance(locomotive.transform.position, markerList[markerList.Count - 1].position));
-            markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
-        }
-
-        if (markerList.Count > (markersBetweenParts * trainCars.Count + markersBetweenParts))
-        {
-            markerList.Remove(markerList[0]);
-        }
-    }*/
 
     public void OnUIArrowPointerDown(string direction)
     {
@@ -99,12 +87,12 @@ public class TrainManager : MonoBehaviour
 
     private void TrainMovement()
     {
-        Vector2 movement = locomotive.transform.up * speed * Time.deltaTime;
+        movement = locomotive.transform.up * speed * Time.deltaTime;
         locomotive.GetComponent<Rigidbody2D>().velocity = movement;
         fuelBar.DecreaseFuel(movement.sqrMagnitude * Time.deltaTime / 40);
         
-        Vector3 targetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
-        mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, targetPosition, ref velocity, 0.2f);
+        camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
+        mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, 0.2f);
 
         if (moveInputHorizontal != 0)
         {

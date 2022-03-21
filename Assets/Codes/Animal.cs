@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class Animal : MonoBehaviour
 {
     public TrainManager trainManager;
