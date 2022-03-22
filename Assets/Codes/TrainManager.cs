@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class TrainManager : MonoBehaviour
 {
@@ -9,9 +8,9 @@ public class TrainManager : MonoBehaviour
     [SerializeField] 
     private float turnSpeed = 170;
     [SerializeField]
-    private TMP_Text countText;
-    [SerializeField]
     private FuelBar fuelBar;
+    [SerializeField]
+    private GameObject collectedAnimalsUI;
     [SerializeField]
     private GameObject locomotivePrefab;
     [SerializeField]
@@ -24,6 +23,7 @@ public class TrainManager : MonoBehaviour
     private List<GameObject> trainCars = new List<GameObject>();
     private Camera mainCamera;
     private GameObject locomotive;
+    private Inventory inventory;
     private Vector2 movement;
     private Vector3 camTargetPosition;
     private Vector3 velocity;
@@ -32,6 +32,7 @@ public class TrainManager : MonoBehaviour
     {
         markerList.Clear();
         mainCamera = Camera.main;
+        inventory = new Inventory();
         locomotive = Instantiate(locomotivePrefab, transform.position, transform.rotation, transform);
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
         fuelBar.SetMaxFuel(50);
@@ -81,12 +82,12 @@ public class TrainManager : MonoBehaviour
         trainCars.Clear();
     }
 
-    public void Grow()
+    public void Grow(string collectedName)
     {
         GameObject trainCar = Instantiate(trainCarPrefab, markerList[markerList.Count - 1].position, markerList[markerList.Count - 1].rotation, transform);
         trainCars.Add(trainCar);
         cameraZoomsLeft = 0.35f;
-        countText.text = trainCars.Count.ToString();
+        inventory.UpdateAnimalCountsToUI(collectedName, collectedAnimalsUI);
     }
 
     private void TrainMovement()
