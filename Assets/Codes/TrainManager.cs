@@ -17,6 +17,7 @@ public class TrainManager : MonoBehaviour
     private GameObject trainCarPrefab;
 
     private float cameraZoomsLeft = 0f;
+    private float fuelMultiplier = 1f;
     private float moveInputHorizontal;
     private int markersBetweenParts = 19;
     private List<Marker> markerList = new List<Marker>();
@@ -80,6 +81,7 @@ public class TrainManager : MonoBehaviour
         
         markerList.RemoveRange(0, trainCars.Count * markersBetweenParts);
         trainCars.Clear();
+        fuelMultiplier = 1f;
     }
 
     public void Grow(string collectedName)
@@ -88,13 +90,14 @@ public class TrainManager : MonoBehaviour
         trainCars.Add(trainCar);
         cameraZoomsLeft = 0.35f;
         inventory.UpdateAnimalCountsToUI(collectedName, collectedAnimalsUI);
+        fuelMultiplier += 0.25f;
     }
 
     private void TrainMovement()
     {
         movement = locomotive.transform.up * speed * Time.deltaTime;
         locomotive.GetComponent<Rigidbody2D>().velocity = movement;
-        fuelBar.DecreaseFuel(movement.sqrMagnitude * Time.deltaTime / 40);
+        fuelBar.DecreaseFuel(movement.sqrMagnitude * Time.deltaTime / 40 * fuelMultiplier);
         
         camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
         mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, 0.2f);
