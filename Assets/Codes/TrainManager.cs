@@ -13,8 +13,8 @@ public class TrainManager : MonoBehaviour
     private GameObject collectedAnimalsUI;
     [SerializeField]
     private GameObject locomotivePrefab;
-    [SerializeField]
-    private GameObject trainCarPrefab;
+    //[SerializeField]
+    //private GameObject trainCarPrefab;
 
     private float cameraZoomsLeft = 0f;
     private float fuelMultiplier = 1f;
@@ -84,7 +84,7 @@ public class TrainManager : MonoBehaviour
         fuelMultiplier = 1f;
     }
 
-    public void Grow(string collectedName)
+    public void Grow(string collectedName, GameObject trainCarPrefab)
     {
         GameObject trainCar = Instantiate(trainCarPrefab, markerList[markerList.Count - 1].position, markerList[markerList.Count - 1].rotation, transform);
         trainCars.Add(trainCar);

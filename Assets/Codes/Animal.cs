@@ -8,17 +8,14 @@ public class Animal : MonoBehaviour
         Cow,
         Sheep
     }
-    
-    [SerializeField]
-    private AnimalType animalType;
 
     public AnimalType Type
     {
-        get
-        {
-            return animalType;
-        }
+        get;
     }
+
+    [SerializeField]
+    private GameObject trainCarPrefab;
 
     [SerializeField]
     public TrainManager trainManager;
@@ -26,7 +23,7 @@ public class Animal : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player")) {
-            trainManager.Grow(this.gameObject.name);
+            trainManager.Grow(this.gameObject.name, trainCarPrefab);
             Destroy(this.gameObject);
         }
     }
