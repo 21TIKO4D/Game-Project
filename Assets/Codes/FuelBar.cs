@@ -20,7 +20,6 @@ public class FuelBar : MonoBehaviour
 
     public void DecreaseFuel(float amount)
 	{
-		Debug.Log("fuel: " + amount);
 		slider.value -= amount;
 		fill.color = gradient.Evaluate(slider.normalizedValue);
 	}
