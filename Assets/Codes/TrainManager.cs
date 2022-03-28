@@ -12,11 +12,13 @@ public class TrainManager : MonoBehaviour
     [SerializeField]
     private GameObject collectedAnimalsUI;
     [SerializeField]
+    private GameManager gameManager;
+    [SerializeField]
     private GameObject locomotive;
 
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
-    private float fuelMultiplier = 1f;
+    private float fuelMultiplier = 3f;
     private float moveInputHorizontal;
     private int markersBetweenParts = 19;
     private List<Marker> markerList = new List<Marker>();
@@ -39,6 +41,11 @@ public class TrainManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (gameManager.IsPaused)
+        {
+            locomotive.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            return;
+        }
         TrainMovement();
         if (cameraZoomsLeft > 0.01f) {
             mainCamera.orthographicSize += Time.deltaTime / 2;
@@ -118,6 +125,10 @@ public class TrainManager : MonoBehaviour
         }
         locomotive.GetComponent<Rigidbody2D>().velocity = movement;
         fuelBar.DecreaseFuel(movement.sqrMagnitude * Time.deltaTime / 40 * fuelMultiplier);
+        if (fuelBar.Value <= 0)
+        {
+            gameManager.GameEnd(false);
+        }
         
         camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
         mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, 0.2f);

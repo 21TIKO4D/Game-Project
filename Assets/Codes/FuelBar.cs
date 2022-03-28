@@ -10,6 +10,14 @@ public class FuelBar : MonoBehaviour
 	[SerializeField]
 	private Slider slider;
 
+	public float Value
+	{
+		get
+		{
+			return slider.value;
+		}
+	}
+
 	public void SetMaxFuel(int fuel)
 	{
 		slider.maxValue = fuel;
