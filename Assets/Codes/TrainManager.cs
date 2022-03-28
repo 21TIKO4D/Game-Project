@@ -12,18 +12,17 @@ public class TrainManager : MonoBehaviour
     [SerializeField]
     private GameObject collectedAnimalsUI;
     [SerializeField]
-    private GameObject locomotivePrefab;
-    //[SerializeField]
-    //private GameObject trainCarPrefab;
+    private GameObject locomotive;
 
     private float cameraZoomsLeft = 0f;
+    private float backwardDistance = 0f;
     private float fuelMultiplier = 1f;
     private float moveInputHorizontal;
     private int markersBetweenParts = 19;
     private List<Marker> markerList = new List<Marker>();
+    private List<Marker> shadowMarkerList = new List<Marker>();
     private List<GameObject> trainCars = new List<GameObject>();
     private Camera mainCamera;
-    private GameObject locomotive;
     private Inventory inventory;
     private Vector2 movement;
     private Vector3 camTargetPosition;
@@ -34,7 +33,6 @@ public class TrainManager : MonoBehaviour
         markerList.Clear();
         mainCamera = Camera.main;
         inventory = new Inventory();
-        locomotive = Instantiate(locomotivePrefab, transform.position, transform.rotation, transform);
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
         fuelBar.SetMaxFuel(50);
     }
@@ -47,11 +45,19 @@ public class TrainManager : MonoBehaviour
             cameraZoomsLeft -= Time.deltaTime / 2;
         }
 
-        if (markerList.Count > (markersBetweenParts * trainCars.Count + markersBetweenParts))
+        if (backwardDistance <= 0.01f)
         {
-            markerList.Remove(markerList[0]);
+            if (markerList.Count > (markersBetweenParts * trainCars.Count + markersBetweenParts))
+            {
+                shadowMarkerList.Add(markerList[0]);
+                markerList.Remove(markerList[0]);
+                if (shadowMarkerList.Count > markersBetweenParts * 4)
+                {
+                    shadowMarkerList.Remove(shadowMarkerList[0]);
+                }
+            }
+            markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
         }
-        markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
     }
 
     public void OnUIArrowPointerDown(string direction)
@@ -95,24 +101,37 @@ public class TrainManager : MonoBehaviour
 
     private void TrainMovement()
     {
-        movement = locomotive.transform.up * speed * Time.deltaTime;
+        if (moveInputHorizontal != 0)
+        {
+            locomotive.transform.Rotate(new Vector3(0, 0, -turnSpeed * Time.deltaTime * moveInputHorizontal));
+            mainCamera.transform.rotation = locomotive.transform.rotation;
+        }
+        bool isColliding = backwardDistance >= 0.01f;
+        if (isColliding)
+        {
+            movement = -locomotive.transform.up * (speed * 0.65f) * Time.deltaTime;
+            backwardDistance -= movement.normalized.magnitude / 2;
+        } else
+        {
+            movement = locomotive.transform.up * speed * Time.deltaTime;
+        }
         locomotive.GetComponent<Rigidbody2D>().velocity = movement;
         fuelBar.DecreaseFuel(movement.sqrMagnitude * Time.deltaTime / 40 * fuelMultiplier);
         
         camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
         mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, 0.2f);
 
-        if (moveInputHorizontal != 0)
-        {
-            locomotive.transform.Rotate(new Vector3(0, 0, -turnSpeed * Time.deltaTime * moveInputHorizontal));
-            mainCamera.transform.rotation = locomotive.transform.rotation;
-        }
-
         for (int i = 0; i < trainCars.Count; i++)
         {
-            trainCars[i].transform.position = markerList[markersBetweenParts * (i + 1) - 1].position;
-            trainCars[i].transform.rotation = markerList[markersBetweenParts * (i + 1) - 1].rotation;
+            trainCars[i].transform.position = markerList[markersBetweenParts * (i + 1) - (isColliding ? 2 : 1)].position;
+            trainCars[i].transform.rotation = markerList[markersBetweenParts * (i + 1) - (isColliding ? 2 : 1)].rotation;
         }
+    }
+
+    public void OnTrainCollision()
+    {
+        markerList.CopyTo(shadowMarkerList.ToArray(), 0);
+        backwardDistance = 15f;
     }
 
     public class Marker
