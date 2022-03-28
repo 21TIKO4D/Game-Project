@@ -82,7 +82,9 @@ public class TrainManager : MonoBehaviour
     {
         for (int i = 0; i < trainCars.Count; i++)
         {
-            Destroy(trainCars[i]);
+            GameObject trainCar = trainCars[i];
+            inventory.UpdateAnimalCountsToUI(trainCar.GetComponent<TrainCarAnimal>().type.ToString(), collectedAnimalsUI);
+            Destroy(trainCar);
         }
         
         markerList.RemoveRange(0, trainCars.Count * markersBetweenParts);
@@ -95,7 +97,7 @@ public class TrainManager : MonoBehaviour
         GameObject trainCar = Instantiate(trainCarPrefab, markerList[markerList.Count - 1].position, markerList[markerList.Count - 1].rotation, transform);
         trainCars.Add(trainCar);
         cameraZoomsLeft = 0.35f;
-        inventory.UpdateAnimalCountsToUI(collectedName, collectedAnimalsUI);
+        //inventory.UpdateAnimalCountsToUI(collectedName, collectedAnimalsUI);
         fuelMultiplier += 0.25f;
     }
 
