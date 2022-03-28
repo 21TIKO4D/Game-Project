@@ -97,7 +97,6 @@ public class TrainManager : MonoBehaviour
         GameObject trainCar = Instantiate(trainCarPrefab, markerList[markerList.Count - 1].position, markerList[markerList.Count - 1].rotation, transform);
         trainCars.Add(trainCar);
         cameraZoomsLeft = 0.35f;
-        //inventory.UpdateAnimalCountsToUI(collectedName, collectedAnimalsUI);
         fuelMultiplier += 0.25f;
     }
 
@@ -123,10 +122,12 @@ public class TrainManager : MonoBehaviour
         camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
         mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, 0.2f);
 
+        byte recudeAmount = isColliding ? (byte)2 : (byte)1;
         for (int i = 0; i < trainCars.Count; i++)
         {
-            trainCars[i].transform.position = markerList[markersBetweenParts * (i + 1) - (isColliding ? 2 : 1)].position;
-            trainCars[i].transform.rotation = markerList[markersBetweenParts * (i + 1) - (isColliding ? 2 : 1)].rotation;
+            int nextMarker = markersBetweenParts * (i + 1) - recudeAmount;
+            trainCars[i].transform.position = markerList[nextMarker].position;
+            trainCars[i].transform.rotation = markerList[nextMarker].rotation;
         }
     }
 
