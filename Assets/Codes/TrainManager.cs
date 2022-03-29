@@ -18,9 +18,10 @@ public class TrainManager : MonoBehaviour
 
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
-    private float fuelMultiplier = 3f;
+    private float fuelMultiplier = 2f;
     private float moveInputHorizontal;
     private int markersBetweenParts = 19;
+    private Dictionary<string, int> collectedAnimals = new Dictionary<string, int>();
     private List<Marker> markerList = new List<Marker>();
     private List<Marker> shadowMarkerList = new List<Marker>();
     private List<GameObject> trainCars = new List<GameObject>();
@@ -90,9 +91,20 @@ public class TrainManager : MonoBehaviour
         for (int i = 0; i < trainCars.Count; i++)
         {
             GameObject trainCar = trainCars[i];
-            inventory.UpdateAnimalCountsToUI(trainCar.GetComponent<TrainCarAnimal>().type.ToString(), collectedAnimalsUI);
+            string animalName = trainCar.GetComponent<TrainCarAnimal>().type.ToString();
+            inventory.UpdateAnimalCountsToUI(animalName, collectedAnimalsUI);
+            if (!collectedAnimals.ContainsKey(animalName))
+            {
+                collectedAnimals.Add(animalName, 1);
+            }
+            else
+            {
+                collectedAnimals[animalName]++;
+            }
             Destroy(trainCar);
         }
+        
+        gameManager.CheckAnimalCount(collectedAnimals);
         
         markerList.RemoveRange(0, trainCars.Count * markersBetweenParts);
         trainCars.Clear();

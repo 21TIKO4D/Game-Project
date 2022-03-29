@@ -5,19 +5,35 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
+    private GameObject animals;
+
+    [SerializeField]
     private GameObject gameEndUI;
 
     [SerializeField]
     private GameObject nextLevelButton;
 
     [SerializeField]
-    private GameObject PauseMenuUI;
+    private GameObject pauseMenuUI;
+
+    private Dictionary<string, int> animalsCount = new Dictionary<string, int>();
 
     public bool IsPaused { get; set; }
 
     public void Start()
     {
-        PauseMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        foreach (Transform animalType in animals.transform)
+        {
+            foreach (Transform animal in animalType.transform)
+            {
+                if (!animalsCount.ContainsKey(animal.name))
+                {
+                    animalsCount.Add(animal.name, 0);
+                }
+                animalsCount[animal.name] = animalsCount[animal.name] + 1;
+            }
+        }
     }
     
     public void BackToMainMenu()
@@ -38,16 +54,39 @@ public class GameManager : MonoBehaviour
             nextLevelButton.SetActive(false);
         }
     }
+
+    public void CheckAnimalCount(Dictionary<string, int> collectedAnimals)
+    {
+        bool completed = true;
+        foreach (KeyValuePair<string, int> animal in animalsCount)
+        {
+            if (collectedAnimals.ContainsKey(animal.Key))
+            {
+                if (collectedAnimals[animal.Key] < animal.Value)
+                {
+                    completed = false;
+                }
+            }
+            else
+            {
+                completed = false;
+            }
+        }
+        if (completed)
+        {
+            GameEnd(true);
+        }
+    }
     
     public void Pause()
     {
-        PauseMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(true);
         IsPaused = true;
     }
 
     public void Resume()
     {
-        PauseMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
         IsPaused = false;
     }
 }
