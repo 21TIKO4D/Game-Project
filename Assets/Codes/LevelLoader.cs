@@ -39,6 +39,8 @@ public class LevelLoader : MonoBehaviour
 		if (Current == null)
 		{
 			Current = this;
+			PlayerPrefs.DeleteAll();
+        	PlayerPrefs.SetString("currentUI", "MainMenu");
 		}
 		else
 		{
@@ -86,7 +88,6 @@ public class LevelLoader : MonoBehaviour
 		SceneManager.LoadSceneAsync(LoaderName, LoadSceneMode.Additive);
 	}
 
-	// Suoritetaan, kun scene on ladattu
 	private void OnLevelLoaded(Scene scene, LoadSceneMode mode)
 	{
 		switch (state)
@@ -144,6 +145,10 @@ public class LevelLoader : MonoBehaviour
 		// Näyttö on musta, joten pelaaja ei enää näe alkuperäistä sceneä.
 		// Unloadataan se
 		SceneManager.UnloadSceneAsync(originalScene);
+		if (nextSceneName.Equals("Menu"))
+		{
+			PlayerPrefs.SetString("currentUI", "LevelMenu");
+		}
 		// Ladataan seuraava scene
 		SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Additive);
 		state = LoadingState.InProgress;
