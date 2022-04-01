@@ -37,7 +37,7 @@ public class Fader : MonoBehaviour
 		switch (state)
 		{
 			case FadeState.FadeIn:
-				bgColor.a = Mathf.Clamp01(bgColor.a + Time.deltaTime * speed); // Pidetään arvo aina välillä [0,1]
+				bgColor.a = Mathf.Clamp01(bgColor.a + Time.unscaledDeltaTime * speed); // Pidetään arvo aina välillä [0,1]
 				background.color = bgColor;
 
 				if (bgColor.a == 1)
@@ -46,7 +46,7 @@ public class Fader : MonoBehaviour
 				}
 				break;
 			case FadeState.FadeOut:
-				bgColor.a = Mathf.Clamp01(bgColor.a - Time.deltaTime * speed); // Pidetään arvo aina välillä [0,1]
+				bgColor.a = Mathf.Clamp01(bgColor.a - Time.unscaledDeltaTime * speed); // Pidetään arvo aina välillä [0,1]
 				background.color = bgColor;
 
 				if (bgColor.a == 0)

@@ -12,9 +12,11 @@ public class TrainManager : MonoBehaviour
     [SerializeField]
     private GameObject collectedAnimalsUI;
     [SerializeField]
-    private GameManager gameManager;
+    public GameManager gameManager;
     [SerializeField]
     private GameObject locomotive;
+    [SerializeField]
+    private GameObject trainCarPrefab;
 
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
@@ -38,6 +40,9 @@ public class TrainManager : MonoBehaviour
         inventory = new Inventory();
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
         fuelBar.SetMaxFuel(50);
+        
+        LevelLoader.Current.transform.GetChild(0).GetComponent<LevelData>().LoadData(this);
+        gameManager.LevelStart();
     }
 
     private void FixedUpdate()
@@ -91,7 +96,7 @@ public class TrainManager : MonoBehaviour
         for (int i = 0; i < trainCars.Count; i++)
         {
             GameObject trainCar = trainCars[i];
-            string animalName = trainCar.GetComponent<TrainCarAnimal>().type.ToString();
+            string animalName = trainCar.name;
             inventory.UpdateAnimalCountsToUI(animalName, collectedAnimalsUI);
             if (!collectedAnimals.ContainsKey(animalName))
             {
@@ -111,9 +116,10 @@ public class TrainManager : MonoBehaviour
         fuelMultiplier = 1f;
     }
 
-    public void Grow(string collectedName, GameObject trainCarPrefab)
+    public void Grow(string collectedName)
     {
         GameObject trainCar = Instantiate(trainCarPrefab, markerList[markerList.Count - 1].position, markerList[markerList.Count - 1].rotation, transform);
+        trainCar.name = collectedName;
         trainCars.Add(trainCar);
         cameraZoomsLeft = 0.35f;
         fuelMultiplier += 0.25f;

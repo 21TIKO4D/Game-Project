@@ -3110,7 +3110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2398830318303779687, guid: aea1c460fd00d2b409c44ad4dea76287, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2398830318303779687, guid: aea1c460fd00d2b409c44ad4dea76287, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3133,8 +3133,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2398830318303779687, guid: aea1c460fd00d2b409c44ad4dea76287, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 6223045504964516514, guid: fe5ca65e304368c458681bcc6b8fd158, type: 3}
+    - target: {fileID: 2398830318303779687, guid: aea1c460fd00d2b409c44ad4dea76287, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2826927688409805457, guid: aea1c460fd00d2b409c44ad4dea76287, type: 3}
       propertyPath: m_fontSizeBase

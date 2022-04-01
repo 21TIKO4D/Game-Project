@@ -16,29 +16,31 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenuUI;
 
+    [SerializeField]
+    public Grid tileMapGrid;
+
     private Dictionary<string, int> animalsCount = new Dictionary<string, int>();
 
     public bool IsPaused { get; set; }
 
-    public void Start()
+    public TrainManager TrainManager;
+
+    public void LevelStart()
     {
         pauseMenuUI.SetActive(false);
-        foreach (Transform animalType in animals.transform)
+        foreach (Transform animal in animals.transform)
         {
-            foreach (Transform animal in animalType.transform)
+            if (!animalsCount.ContainsKey(animal.name))
             {
-                if (!animalsCount.ContainsKey(animal.name))
-                {
-                    animalsCount.Add(animal.name, 0);
-                }
-                animalsCount[animal.name] = animalsCount[animal.name] + 1;
+                animalsCount.Add(animal.name, 0);
             }
+            animalsCount[animal.name] = animalsCount[animal.name] + 1;
         }
     }
     
     public void BackToMainMenu()
     {
-        LevelLoader.Current.LoadLevel("Menu");
+        LevelLoader.Current.LoadScene("Menu");
     }
     
     public void GameEnd(bool completed)

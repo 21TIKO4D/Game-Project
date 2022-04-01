@@ -23,13 +23,11 @@ public class LevelLoader : MonoBehaviour
 		private set;
 	}
 
-	private LoadingState state = LoadingState.None;
-
-	// Viittaus alkuperäiseen sceneen
-	private Scene originalScene;
-	// Seuraavan scenen nimi
 	private string nextSceneName;
-	// Viittaus loading-sceneen
+	private Fader fader;
+	private GameObject AnimalsObj;
+	private LoadingState state = LoadingState.None;
+	private Scene originalScene;
 	private Scene loadingScene;
 	private Scene optionsScene;
 
@@ -79,7 +77,7 @@ public class LevelLoader : MonoBehaviour
 		Time.timeScale = 1; // Palauta pelin normaalinopeus
 	}
 
-	public void LoadLevel(string sceneName)
+	public void LoadScene(string sceneName)
 	{
 		nextSceneName = sceneName;
 		originalScene = SceneManager.GetActiveScene();
@@ -98,31 +96,17 @@ public class LevelLoader : MonoBehaviour
 				GameObject[] rootObjects = loadingScene.GetRootGameObjects(); // Palauttaa scenen kaikki root-GameObjectit
 				foreach (GameObject item in rootObjects)
 				{
-					Fader fader = item.GetComponentInChildren<Fader>();
-
-					if (fader != null)
-					{
-						float fadeTime = fader.FadeIn();
-						StartCoroutine(ContinueLoad(fadeTime));
-
-						break; // Poistuu loopista
-					}
+					fader = item.GetComponentInChildren<Fader>();
+				}
+				if (fader != null)
+				{
+					StartCoroutine(ContinueLoad(fader.FadeIn()));
 				}
 				break;
 			case LoadingState.InProgress:
-				foreach (GameObject item in loadingScene.GetRootGameObjects())
-				{
-					Fader fader = item.GetComponentInChildren<Fader>();
-					if (fader != null)
-					{
-						float fadeTime = fader.FadeOut();
-						StartCoroutine(FinalizeLoad(fadeTime));
+				StartCoroutine(FinalizeLoad(fader.FadeOut()));
 
-						state = LoadingState.None;
-
-						break; // Poistuu loopista
-					}
-				}
+				state = LoadingState.None;
 				break;
 			case LoadingState.Options:
 				optionsScene = scene;

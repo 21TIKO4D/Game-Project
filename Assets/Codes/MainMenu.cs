@@ -33,8 +33,9 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void StartLevel(int number)
+    public void StartLevel(GameObject levelData)
     {
-        LevelLoader.Current.LoadLevel("GameScene");
+        Instantiate(levelData, LevelLoader.Current.transform);
+        LevelLoader.Current.LoadScene("LevelTemplate");
     }
 }

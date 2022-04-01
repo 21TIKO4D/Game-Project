@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class Animal : MonoBehaviour
 {
     public enum AnimalType
@@ -14,16 +13,16 @@ public class Animal : MonoBehaviour
         get;
     }
 
-    [SerializeField]
-    private GameObject trainCarPrefab;
-
-    [SerializeField]
-    public TrainManager trainManager;
+    public TrainManager TrainManager
+    {
+        get;
+        set;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player")) {
-            trainManager.Grow(this.gameObject.name, trainCarPrefab);
+            TrainManager.Grow(this.gameObject.name);
             Destroy(this.gameObject);
         }
     }
