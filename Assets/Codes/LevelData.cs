@@ -24,19 +24,25 @@ public class LevelData : MonoBehaviour
         }
         if (animalsObj != null)
         {
-            foreach (Transform obj in LevelLoader.Current.transform.GetChild(0).transform)
+            foreach (Transform levelObj in LevelLoader.Current.transform)
             {
-                if (obj.name == "Grid")
+                if (levelObj.name.Equals("Level_" + LevelLoader.Current.currentLevel))
                 {
-                    Instantiate(tileMap.transform.GetChild(0), Vector3.zero, Quaternion.identity, trainManager.gameManager.tileMapGrid.transform);
-                } else
-                {
-                    GameObject animal = Instantiate(obj.gameObject, obj.position, obj.rotation, animalsObj.transform);
-                    animal.name = animal.name;
-                    animal.gameObject.GetComponent<Animal>().TrainManager = trainManager;
+                    foreach (Transform obj in levelObj.transform)
+                    {
+                        if (obj.name == "Grid")
+                        {
+                            Instantiate(obj.transform.GetChild(0), Vector3.zero, Quaternion.identity, trainManager.gameManager.tileMapGrid.transform);
+                        } else
+                        {
+                            GameObject animal = Instantiate(obj.gameObject, obj.position, obj.rotation, animalsObj.transform);
+                            animal.name = animal.name;
+                            animal.gameObject.GetComponent<Animal>().TrainManager = trainManager;
+                        }
+                    }
+                    break;
                 }
             }
-            Destroy(LevelLoader.Current.transform.GetChild(0).gameObject);
         }
     }
 

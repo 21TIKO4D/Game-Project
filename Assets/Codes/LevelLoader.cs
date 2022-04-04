@@ -23,6 +23,7 @@ public class LevelLoader : MonoBehaviour
 		private set;
 	}
 
+	public int currentLevel = -1;
 	private string nextSceneName;
 	private Fader fader;
 	private GameObject AnimalsObj;
@@ -37,8 +38,9 @@ public class LevelLoader : MonoBehaviour
 		if (Current == null)
 		{
 			Current = this;
-			PlayerPrefs.DeleteAll();
         	PlayerPrefs.SetString("currentUI", "MainMenu");
+			PlayerPrefs.SetInt("Level0", 1);
+			PlayerPrefs.Save();
 		}
 		else
 		{
@@ -79,6 +81,12 @@ public class LevelLoader : MonoBehaviour
 
 	public void LoadScene(string sceneName)
 	{
+		LoadScene(sceneName, -1);
+	}
+
+	public void LoadScene(string sceneName, int level)
+	{
+		currentLevel = level;
 		nextSceneName = sceneName;
 		originalScene = SceneManager.GetActiveScene();
 		state = LoadingState.Started;

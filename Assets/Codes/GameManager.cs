@@ -42,20 +42,6 @@ public class GameManager : MonoBehaviour
     {
         LevelLoader.Current.LoadScene("Menu");
     }
-    
-    public void GameEnd(bool completed)
-    {
-        IsPaused = true;
-        gameEndUI.SetActive(true);
-        if (completed)
-        {
-            nextLevelButton.SetActive(true);
-        }
-        else
-        {
-            nextLevelButton.SetActive(false);
-        }
-    }
 
     public void CheckAnimalCount(Dictionary<string, int> collectedAnimals)
     {
@@ -79,11 +65,38 @@ public class GameManager : MonoBehaviour
             GameEnd(true);
         }
     }
+
+    public void GameEnd(bool completed)
+    {
+        IsPaused = true;
+        gameEndUI.SetActive(true);
+        if (completed)
+        {
+            nextLevelButton.SetActive(true);
+            PlayerPrefs.SetInt("Level" + LevelLoader.Current.currentLevel, 1);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            nextLevelButton.SetActive(false);
+        }
+    }
+
+    public void NextLevel()
+	{
+        LevelLoader.Current.currentLevel++;
+		LevelLoader.Current.LoadScene("LevelTemplate", LevelLoader.Current.currentLevel);
+	}
     
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
         IsPaused = true;
+    }
+
+    public void RestartLevel()
+    {
+        LevelLoader.Current.LoadScene("LevelTemplate", LevelLoader.Current.currentLevel);
     }
 
     public void Resume()

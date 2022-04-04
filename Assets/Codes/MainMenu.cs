@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,6 +10,19 @@ public class MainMenu : MonoBehaviour
 
     public void Start()
     {
+        int i = 0;
+        foreach (RectTransform levelIcon in levelMenu.transform.GetChild(1).transform)
+        {
+            if (PlayerPrefs.HasKey("Level" + i))
+            {
+                levelIcon.GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                levelIcon.GetComponent<Button>().interactable = false;
+            }
+            i++;
+        }
         if (PlayerPrefs.GetString("currentUI") == "LevelMenu")
         {
             this.gameObject.SetActive(false);
@@ -33,9 +46,8 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void StartLevel(GameObject levelData)
+    public void StartLevel(int level)
     {
-        Instantiate(levelData, LevelLoader.Current.transform);
-        LevelLoader.Current.LoadScene("LevelTemplate");
+        LevelLoader.Current.LoadScene("LevelTemplate", level);
     }
 }
