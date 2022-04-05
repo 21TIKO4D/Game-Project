@@ -156,6 +156,8 @@ MonoBehaviour:
   gameEndUI: {fileID: 1692840755}
   nextLevelButton: {fileID: 1686827692}
   pauseMenuUI: {fileID: 1994898108}
+  tileMapGrid: {fileID: 0}
+  TrainManager: {fileID: 0}
 --- !u!4 &34070738
 Transform:
   m_ObjectHideFlags: 0
@@ -3880,7 +3882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1560435009
 MonoBehaviour:
   m_ObjectHideFlags: 0
