@@ -19,11 +19,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public Grid tileMapGrid;
 
-    private Dictionary<string, int> animalsCount = new Dictionary<string, int>();
-
     public bool IsPaused { get; set; }
 
     public TrainManager TrainManager;
+    
+    private Dictionary<string, int> animalsCount = new Dictionary<string, int>();
 
     public void LevelStart()
     {
@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour
     
     public void Pause()
     {
+        if (IsPaused) return;
+
         pauseMenuUI.SetActive(true);
         IsPaused = true;
     }

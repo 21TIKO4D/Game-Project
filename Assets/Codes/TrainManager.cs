@@ -20,12 +20,11 @@ public class TrainManager : MonoBehaviour
 
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
-    private float fuelMultiplier = 2f;
+    private float fuelMultiplier = 1.5f;
     private float moveInputHorizontal;
     private int markersBetweenParts = 19;
     private Dictionary<string, int> collectedAnimals = new Dictionary<string, int>();
     private List<Marker> markerList = new List<Marker>();
-    private List<Marker> shadowMarkerList = new List<Marker>();
     private List<GameObject> trainCars = new List<GameObject>();
     private Camera mainCamera;
     private Inventory inventory;
@@ -62,33 +61,15 @@ public class TrainManager : MonoBehaviour
         {
             if (markerList.Count > (markersBetweenParts * trainCars.Count + markersBetweenParts))
             {
-                shadowMarkerList.Add(markerList[0]);
                 markerList.Remove(markerList[0]);
-                if (shadowMarkerList.Count > markersBetweenParts * 4)
-                {
-                    shadowMarkerList.Remove(shadowMarkerList[0]);
-                }
             }
             markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
         }
     }
 
-    public void OnUIArrowPointerDown(string direction)
+    public void OnUIArrowPointerClick(float horizontal)
     {
-        switch (direction.ToLower())
-        {
-            case "left":
-                moveInputHorizontal = -0.5f;
-                break;
-            case "right":
-                moveInputHorizontal = 0.5f;
-                break;
-        }
-    }
-
-    public void OnUIArrowPointerUp()
-    {
-        moveInputHorizontal = 0;
+        moveInputHorizontal += horizontal;
     }
 
     public void ClearAnimals()
@@ -132,8 +113,7 @@ public class TrainManager : MonoBehaviour
             locomotive.transform.Rotate(new Vector3(0, 0, -turnSpeed * Time.deltaTime * moveInputHorizontal));
             mainCamera.transform.rotation = locomotive.transform.rotation;
         }
-        bool isColliding = backwardDistance >= 0.01f;
-        if (isColliding)
+        if (backwardDistance >= 0.01f)
         {
             movement = -locomotive.transform.up * (speed * 0.65f) * Time.deltaTime;
             backwardDistance -= movement.normalized.magnitude / 2;
@@ -151,10 +131,9 @@ public class TrainManager : MonoBehaviour
         camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
         mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, 0.2f);
 
-        byte recudeAmount = isColliding ? (byte)2 : (byte)1;
         for (int i = 0; i < trainCars.Count; i++)
         {
-            int nextMarker = markersBetweenParts * (i + 1) - recudeAmount;
+            int nextMarker = markersBetweenParts * (i + 1) - 1;
             trainCars[i].transform.position = markerList[nextMarker].position;
             trainCars[i].transform.rotation = markerList[nextMarker].rotation;
         }
@@ -162,7 +141,6 @@ public class TrainManager : MonoBehaviour
 
     public void OnTrainCollision()
     {
-        markerList.CopyTo(shadowMarkerList.ToArray(), 0);
         backwardDistance = 15f;
     }
 

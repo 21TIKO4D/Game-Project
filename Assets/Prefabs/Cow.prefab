@@ -97,8 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c8a2bb6b345934ab1bf3e1997f00ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainCarPrefab: {fileID: 4726879341727194386, guid: 70a34f47f678bcc4784b99b663545df0, type: 3}
-  trainManager: {fileID: 0}
 --- !u!70 &4414016072607267285
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,8 +110,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2.16, y: 4.1}
+  m_Offset: {x: 0, y: -0.28}
+  m_Size: {x: 1.75, y: 4.29}
   m_Direction: 0
 --- !u!50 &3639529955852305735
 Rigidbody2D:
