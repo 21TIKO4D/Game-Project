@@ -14,6 +14,12 @@ TextureImporter:
   - first:
       213: -2609427341580239760
     second: Back2
+  - first:
+      213: 186619159996975126
+    second: Arrow
+  - first:
+      213: -8680030790987174517
+    second: Arrow_Pressed
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -160,7 +166,7 @@ TextureImporter:
       name: Back1
       rect:
         serializedVersion: 2
-        x: 1270
+        x: 1271
         y: 306
         width: 210
         height: 210
@@ -194,6 +200,48 @@ TextureImporter:
       bones: []
       spriteID: 07cfaed78a379cbd0800000000000000
       internalID: -2609427341580239760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow
+      rect:
+        serializedVersion: 2
+        x: 1265
+        y: 88
+        width: 210
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 618c6e32321079200800000000000000
+      internalID: 186619159996975126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_Pressed
+      rect:
+        serializedVersion: 2
+        x: 1492
+        y: 88
+        width: 210
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8da1cffbf55a8780800000000000000
+      internalID: -8680030790987174517
       vertices: []
       indices: 
       edges: []
