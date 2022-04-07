@@ -8,9 +8,6 @@ public class GameManager : MonoBehaviour
     private GameObject gameEndUI;
 
     [SerializeField]
-    private GameObject nextLevelButton;
-
-    [SerializeField]
     private GameObject pauseMenuUI;
 
     [SerializeField]
@@ -67,16 +64,15 @@ public class GameManager : MonoBehaviour
     public void GameEnd(bool completed)
     {
         IsPaused = true;
-        gameEndUI.SetActive(true);
         if (completed)
         {
-            nextLevelButton.SetActive(true);
+            gameEndUI.transform.GetChild(0).gameObject.SetActive(true);
             PlayerPrefs.SetInt("Level" + LevelLoader.Current.currentLevel, 1);
             PlayerPrefs.Save();
         }
         else
         {
-            nextLevelButton.SetActive(false);
+            gameEndUI.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
 
