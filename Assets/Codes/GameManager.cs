@@ -5,9 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject animals;
-
-    [SerializeField]
     private GameObject gameEndUI;
 
     [SerializeField]
@@ -21,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public bool IsPaused { get; set; }
 
+    public GameObject animals;
     public TrainManager TrainManager;
     
     private Dictionary<string, int> animalsCount = new Dictionary<string, int>();

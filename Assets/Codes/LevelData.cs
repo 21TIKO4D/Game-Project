@@ -36,7 +36,6 @@ public class LevelData : MonoBehaviour
                         } else
                         {
                             GameObject animal = Instantiate(obj.gameObject, obj.position, obj.rotation, animalsObj.transform);
-                            animal.name = animal.name;
                             animal.gameObject.GetComponent<Animal>().TrainManager = trainManager;
                         }
                     }

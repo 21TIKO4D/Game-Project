@@ -4064,7 +4064,7 @@ GameObject:
   - component: {fileID: 1776438220465746509}
   - component: {fileID: 1776438220465746496}
   - component: {fileID: 1776438220465746499}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Station
   m_TagString: Station
   m_Icon: {fileID: 0}
@@ -4193,6 +4193,26 @@ PrefabInstance:
       propertyPath: collectedAnimalsUI
       value: 
       objectReference: {fileID: 1245925937}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: animalPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: animalPrefabs.Array.data[0].name
+      value: Cow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: animalPrefabs.Array.data[1].name
+      value: Sheep
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: animalPrefabs.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 1577144963596039481, guid: af0ca463ddc1c9a499883e3a6d6513a1, type: 3}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: animalPrefabs.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 1577144963596039481, guid: d1dfa0065157c7a44bf5c31f55a7cf67, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
 --- !u!114 &1776438220591027960 stripped

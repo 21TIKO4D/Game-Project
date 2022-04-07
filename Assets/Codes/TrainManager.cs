@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class TrainManager : MonoBehaviour
@@ -20,7 +21,7 @@ public class TrainManager : MonoBehaviour
 
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
-    private float fuelMultiplier = 1.5f;
+    private float fuelMultiplier = 1f;
     private float moveInputHorizontal;
     private int markersBetweenParts = 19;
     private Dictionary<string, int> collectedAnimals = new Dictionary<string, int>();
@@ -91,10 +92,8 @@ public class TrainManager : MonoBehaviour
         }
         
         gameManager.CheckAnimalCount(collectedAnimals);
-        
-        markerList.RemoveRange(0, trainCars.Count * markersBetweenParts);
         trainCars.Clear();
-        fuelMultiplier = 1f;
+        EmptyTrain();
     }
 
     public void Grow(string collectedName)
@@ -104,6 +103,12 @@ public class TrainManager : MonoBehaviour
         trainCars.Add(trainCar);
         cameraZoomsLeft = 0.35f;
         fuelMultiplier += 0.25f;
+    }
+
+    private void EmptyTrain()
+    {
+        markerList.RemoveRange(0, trainCars.Count * markersBetweenParts);
+        fuelMultiplier = 1f;
     }
 
     private void TrainMovement()
@@ -142,6 +147,53 @@ public class TrainManager : MonoBehaviour
     public void OnTrainCollision()
     {
         backwardDistance = 15f;
+        SummonAnimalAndDestroyCar();
+    }
+
+    private void SummonAnimalAndDestroyCar()
+	{
+        EmptyTrain();
+		while (trainCars.Count > 0)
+        {
+            GameObject trainCar = trainCars[0];
+            Transform obj = FindNewAnimalObj(trainCar);
+
+            if (obj != null)
+            {
+                Vector2 spawnPoint;
+                do
+                {
+                    float x = Random.Range(-27.0f, 27.0f);
+                    float y = Random.Range(-16.0f, 16.0f);
+                    spawnPoint = new Vector2(x, y);
+                } while (Physics2D.OverlapCircle(spawnPoint, 2.2f, LayerMask.GetMask("Obstacle")));
+
+                trainCars.RemoveAt(0);
+
+                GameObject animal = Instantiate(obj.gameObject, spawnPoint, Quaternion.identity, gameManager.animals.transform);
+                trainCar.name = obj.name;
+                animal.gameObject.GetComponent<Animal>().TrainManager = this;
+                Destroy(trainCar);
+            }
+        }
+	}
+
+    private Transform FindNewAnimalObj(GameObject trainCar)
+    {
+        foreach (Transform levelObj in LevelLoader.Current.transform)
+        {
+            if (levelObj.name.Equals("Level_" + LevelLoader.Current.currentLevel))
+            {
+                foreach (Transform obj in levelObj.transform)
+                {
+                    if (trainCar.name.StartsWith(obj.name))
+                    {
+                        return obj;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public class Marker
