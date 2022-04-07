@@ -92,8 +92,8 @@ public class TrainManager : MonoBehaviour
         }
         
         gameManager.CheckAnimalCount(collectedAnimals);
-        trainCars.Clear();
         EmptyTrain();
+        trainCars.Clear();
     }
 
     public void Grow(string collectedName)
