@@ -9,6 +9,9 @@ public class MainMenu : MonoBehaviour
     private GameObject levelMenu;
 
     [SerializeField]
+    private GameObject mainMenu;
+
+    [SerializeField]
     private GameObject locked;
 
     [SerializeField]
@@ -49,18 +52,18 @@ public class MainMenu : MonoBehaviour
         }
         if (PlayerPrefs.GetString("currentUI") == "LevelMenu")
         {
-            this.gameObject.SetActive(false);
+            mainMenu.gameObject.SetActive(false);
             levelMenu.SetActive(true);
         } else if (PlayerPrefs.GetString("currentUI") == "MainMenu")
         {
             levelMenu.SetActive(false);
-            this.gameObject.SetActive(true);
+            mainMenu.gameObject.SetActive(true);
         }
     }
 
     public void OpenLevelMenu()
     {
-        this.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
         levelMenu.SetActive(true);
         PlayerPrefs.SetString("currentUI", "LevelMenu");
     }
