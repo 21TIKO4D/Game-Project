@@ -39,7 +39,7 @@ public class LevelLoader : MonoBehaviour
 		{
 			Current = this;
         	PlayerPrefs.SetString("currentUI", "MainMenu");
-			PlayerPrefs.SetInt("Level0", 1);
+			PlayerPrefs.SetInt("Level0", 0);
 			PlayerPrefs.Save();
 		}
 		else
