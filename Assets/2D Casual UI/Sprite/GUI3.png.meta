@@ -26,6 +26,12 @@ TextureImporter:
   - first:
       213: -1519028192315668860
     second: Pause_Pressed
+  - first:
+      213: 2397411692654757699
+    second: boxArrow
+  - first:
+      213: 4553770331648803056
+    second: boxArrowPressed
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -261,7 +267,7 @@ TextureImporter:
         width: 201
         height: 203
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -282,7 +288,7 @@ TextureImporter:
         width: 201
         height: 203
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -290,6 +296,48 @@ TextureImporter:
       bones: []
       spriteID: 486883148e35beae0800000000000000
       internalID: -1519028192315668860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boxArrow
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 393
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3470e018b31554120800000000000000
+      internalID: 2397411692654757699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boxArrowPressed
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 393
+        width: 270
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f0c3ae5dfd323f30800000000000000
+      internalID: 4553770331648803056
       vertices: []
       indices: 
       edges: []
