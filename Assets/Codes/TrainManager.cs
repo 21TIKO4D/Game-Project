@@ -10,8 +10,7 @@ public class TrainManager : MonoBehaviour
     private float turnSpeed = 170;
     [SerializeField]
     private FuelBar fuelBar;
-    [SerializeField]
-    private GameObject collectedAnimalsUI;
+    public GameObject collectedAnimalsUI;
     [SerializeField]
     public GameManager gameManager;
     [SerializeField]
@@ -41,7 +40,7 @@ public class TrainManager : MonoBehaviour
         fuelBar.SetMaxFuel(50);
         
         LevelLoader.Current.transform.GetChild(0).GetComponent<LevelData>().LoadData(this);
-        gameManager.LevelStart();
+        gameManager.LevelStart(this);
         inventory = new Inventory(collectedAnimalsUI, gameManager);
     }
 
@@ -171,7 +170,7 @@ public class TrainManager : MonoBehaviour
                 trainCars.RemoveAt(0);
 
                 GameObject animal = Instantiate(obj.gameObject, spawnPoint, Quaternion.identity, gameManager.animals.transform);
-                animal.name = obj.name + "(Clone)";
+                animal.name = obj.name;
                 animal.gameObject.GetComponent<Animal>().TrainManager = this;
                 Destroy(trainCar);
             }

@@ -15,7 +15,7 @@ public class Inventory
         this.gameManager = gameManager;
         foreach(Transform child in collectedAnimalsUI.transform)
         {
-            animals.Add(child.name + "(Clone)", 0);
+            animals.Add(child.name, 0);
         }
         UpdateUI();
     }
@@ -35,7 +35,7 @@ public class Inventory
     {
         foreach(Transform child in collectedAnimalsUI.transform)
         {
-            string name = child.name + "(Clone)";
+            string name = child.name;
             child.transform.GetChild(1).GetComponent<TMP_Text>().text = animals[name].ToString() + "/" + GetMaxCount(name);
         }
     }

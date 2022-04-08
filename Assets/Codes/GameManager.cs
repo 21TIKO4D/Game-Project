@@ -13,21 +13,30 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public Grid tileMapGrid;
 
+    [SerializeField]
+    private List<GameObject> animalUIPrefabs;
+
     public bool IsPaused { get; set; }
 
     public GameObject animals;
-    public TrainManager TrainManager;
+    public TrainManager trainManager;
     
     public Dictionary<string, int> animalsCount = new Dictionary<string, int>();
 
-    public void LevelStart()
+    public void LevelStart(TrainManager trainManager)
     {
+        this.trainManager = trainManager;
         pauseMenuUI.SetActive(false);
         foreach (Transform animal in animals.transform)
         {
             if (!animalsCount.ContainsKey(animal.name))
             {
                 animalsCount.Add(animal.name, 0);
+                switch (animal.name.Split('(')[0])
+                {
+                    case "Cow": Instantiate(animalUIPrefabs[0], trainManager.collectedAnimalsUI.transform); break;
+                    case "Sheep": Instantiate(animalUIPrefabs[1], trainManager.collectedAnimalsUI.transform); break;
+                }
             }
             animalsCount[animal.name] = animalsCount[animal.name] + 1;
         }
