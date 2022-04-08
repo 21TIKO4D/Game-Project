@@ -42,5 +42,13 @@ MonoBehaviour:
     m_Localized: KIELI
     m_Metadata:
       m_Items: []
+  - m_Id: 1098691381022720
+    m_Localized: TASO SUORITETTU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098798914588672
+    m_Localized: "TASO EP\xC4ONNISTUI"
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
