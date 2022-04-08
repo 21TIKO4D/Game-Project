@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject animals;
     public TrainManager TrainManager;
     
-    private Dictionary<string, int> animalsCount = new Dictionary<string, int>();
+    public Dictionary<string, int> animalsCount = new Dictionary<string, int>();
 
     public void LevelStart()
     {

@@ -37,12 +37,12 @@ public class TrainManager : MonoBehaviour
     {
         markerList.Clear();
         mainCamera = Camera.main;
-        inventory = new Inventory();
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
         fuelBar.SetMaxFuel(50);
         
         LevelLoader.Current.transform.GetChild(0).GetComponent<LevelData>().LoadData(this);
         gameManager.LevelStart();
+        inventory = new Inventory(collectedAnimalsUI, gameManager);
     }
 
     private void FixedUpdate()
@@ -79,7 +79,7 @@ public class TrainManager : MonoBehaviour
         {
             GameObject trainCar = trainCars[i];
             string animalName = trainCar.name;
-            inventory.UpdateAnimalCountsToUI(animalName, collectedAnimalsUI);
+            inventory.UpdateAnimalCountsToUI(animalName);
             if (!collectedAnimals.ContainsKey(animalName))
             {
                 collectedAnimals.Add(animalName, 1);
@@ -171,7 +171,7 @@ public class TrainManager : MonoBehaviour
                 trainCars.RemoveAt(0);
 
                 GameObject animal = Instantiate(obj.gameObject, spawnPoint, Quaternion.identity, gameManager.animals.transform);
-                trainCar.name = obj.name;
+                animal.name = obj.name + "(Clone)";
                 animal.gameObject.GetComponent<Animal>().TrainManager = this;
                 Destroy(trainCar);
             }

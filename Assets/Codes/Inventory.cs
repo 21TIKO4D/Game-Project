@@ -5,26 +5,38 @@ using TMPro;
 public class Inventory
 {
     private Dictionary<string, int> animals = new Dictionary<string, int>();
+
+    private GameObject collectedAnimalsUI;
+    private GameManager gameManager;
     
-    public void UpdateAnimalCountsToUI(string collectedName, GameObject collectedAnimalsUI)
+    public Inventory(GameObject collectedAnimalsUI, GameManager gameManager)
     {
-        if (!animals.ContainsKey(collectedName))
-        {
-            animals.Add(collectedName, 0);
-        }
-        animals[collectedName] = animals[collectedName] + 1;
+        this.collectedAnimalsUI = collectedAnimalsUI;
+        this.gameManager = gameManager;
         foreach(Transform child in collectedAnimalsUI.transform)
         {
-            if (collectedName.Contains(child.gameObject.name))
-            {
-                foreach(Transform c in child.transform)
-                {
-                    if (c.name.Equals("CountText"))
-                    {
-                        c.GetComponent<TMP_Text>().text = animals[collectedName].ToString();
-                    }
-                }
-            }
+            animals.Add(child.name + "(Clone)", 0);
+        }
+        UpdateUI();
+    }
+
+    public void UpdateAnimalCountsToUI(string collectedName)
+    {
+        animals[collectedName] += 1;
+        UpdateUI();
+    }
+
+    public int GetMaxCount(string name)
+    {
+        return gameManager.animalsCount[name];
+    }
+
+    private void UpdateUI()
+    {
+        foreach(Transform child in collectedAnimalsUI.transform)
+        {
+            string name = child.name + "(Clone)";
+            child.transform.GetChild(1).GetComponent<TMP_Text>().text = animals[name].ToString() + "/" + GetMaxCount(name);
         }
     }
 }
