@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
     public void Start()
     {
         int i = 1;
-        foreach (RectTransform levelIcon in levelMenu.transform.GetChild(1).transform)
+        foreach (RectTransform levelIcon in levelMenu.transform.GetChild(0).GetChild(1).transform)
         {
             Destroy(levelIcon.transform.GetChild(1).gameObject);
             if (i == 1 || PlayerPrefs.HasKey("Level" + (i-1)))
