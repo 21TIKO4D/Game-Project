@@ -170,7 +170,7 @@ public class TrainManager : MonoBehaviour
                 trainCars.RemoveAt(0);
 
                 GameObject animal = Instantiate(obj.gameObject, spawnPoint, Quaternion.identity, gameManager.animals.transform);
-                animal.name = obj.name;
+                animal.name = obj.name + "(Clone)";
                 animal.gameObject.GetComponent<Animal>().TrainManager = this;
                 Destroy(trainCar);
             }
