@@ -13,7 +13,7 @@ public class TrainManager : MonoBehaviour
     public GameObject collectedAnimalsUI;
     [SerializeField]
     public GameManager gameManager;
-    [SerializeField]
+    
     private GameObject locomotive;
     [SerializeField]
     private GameObject trainCarPrefab;
@@ -34,6 +34,7 @@ public class TrainManager : MonoBehaviour
 
     private void Start()
     {
+        locomotive = this.gameObject;
         markerList.Clear();
         mainCamera = Camera.main;
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
@@ -132,8 +133,8 @@ public class TrainManager : MonoBehaviour
             gameManager.GameEnd(false);
         }
         
-        camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2.25f, -10));
-        mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, 0.2f);
+        camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2f, -10));
+        mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, Time.deltaTime);
 
         for (int i = 0; i < trainCars.Count; i++)
         {
