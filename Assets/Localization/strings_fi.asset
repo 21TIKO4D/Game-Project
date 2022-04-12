@@ -50,5 +50,13 @@ MonoBehaviour:
     m_Localized: "TASO EP\xC4ONNISTUI"
     m_Metadata:
       m_Items: []
+  - m_Id: 2648274857857024
+    m_Localized: TASOT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2648354474135552
+    m_Localized: Tauko
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
