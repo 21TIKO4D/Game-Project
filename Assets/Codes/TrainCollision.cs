@@ -9,6 +9,13 @@ public class TrainCollision : MonoBehaviour
         if (other.gameObject.CompareTag("Obstacle"))
         {
             this.GetComponentInParent<TrainManager>().OnTrainCollision();
+            
+            ParticleSystem effect = other.gameObject.GetComponentInChildren<ParticleSystem>();
+            if (effect != null)
+            {
+                effect.gameObject.transform.position = this.gameObject.transform.position;
+                effect.Play();
+            }
         }
     }
 }
