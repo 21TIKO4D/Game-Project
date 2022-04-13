@@ -10,7 +10,7 @@ public class TrainCollision : MonoBehaviour
         {
             this.GetComponentInParent<TrainManager>().OnTrainCollision();
             
-            ParticleSystem effect = other.gameObject.GetComponentInChildren<ParticleSystem>();
+            ParticleSystem effect = other.gameObject.transform.parent.GetChild(0).GetComponent<ParticleSystem>();
             if (effect != null)
             {
                 effect.gameObject.transform.position = this.gameObject.transform.position;
