@@ -7,8 +7,7 @@ public class FuelBar : MonoBehaviour
 	private Gradient gradient;
 	[SerializeField]
 	private Image fill;
-	[SerializeField]
-	private Slider slider;
+	public Slider slider;
 
 	public float Value
 	{

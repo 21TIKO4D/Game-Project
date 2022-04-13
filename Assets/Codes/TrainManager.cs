@@ -8,8 +8,7 @@ public class TrainManager : MonoBehaviour
     private float speed = 280;
     [SerializeField] 
     private float turnSpeed = 170;
-    [SerializeField]
-    private FuelBar fuelBar;
+    public FuelBar fuelBar;
     public GameObject collectedAnimalsUI;
     [SerializeField]
     public GameManager gameManager;
@@ -20,7 +19,7 @@ public class TrainManager : MonoBehaviour
 
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
-    private float fuelMultiplier = 1f;
+    private float fuelMultiplier = 1.2f;
     private float moveInputHorizontal;
     private int markersBetweenParts = 19;
     private Dictionary<string, int> collectedAnimals = new Dictionary<string, int>();

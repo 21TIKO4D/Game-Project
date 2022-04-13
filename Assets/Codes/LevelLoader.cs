@@ -38,7 +38,7 @@ public class LevelLoader : MonoBehaviour
 		if (Current == null)
 		{
 			Current = this;
-        	PlayerPrefs.SetString("currentUI", "MainMenu");
+			PlayerPrefs.SetString("currentUI", "MainMenu");
 			PlayerPrefs.SetInt("Level0", 0);
 			PlayerPrefs.Save();
 		}

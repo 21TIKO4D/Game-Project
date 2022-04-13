@@ -75,9 +75,22 @@ public class GameManager : MonoBehaviour
         IsPaused = true;
         if (completed)
         {
+            int stars = 1;
+            float fuelValue = trainManager.fuelBar.slider.normalizedValue;
+            if (fuelValue >= 0.45)
+            {
+                stars = 3;
+            } else if (fuelValue >= 0.15) 
+            {
+                stars = 2;
+            }
             gameEndUI.transform.GetChild(0).gameObject.SetActive(true);
-            PlayerPrefs.SetInt("Level" + LevelLoader.Current.currentLevel, 1);
-            PlayerPrefs.Save();
+            gameEndUI.transform.GetChild(0).GetChild(stars).gameObject.SetActive(true);
+            if (stars > PlayerPrefs.GetInt("Level" + LevelLoader.Current.currentLevel, 0))
+            {
+                PlayerPrefs.SetInt("Level" + LevelLoader.Current.currentLevel, stars);
+                PlayerPrefs.Save();
+            }
         }
         else
         {
