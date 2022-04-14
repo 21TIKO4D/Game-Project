@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
     private GameObject levelMenu;
+
+    [SerializeField]
+    private GameObject optionsMenu;
 
     [SerializeField]
     private GameObject mainMenu;
@@ -26,7 +30,56 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject stars3;
 
+    [SerializeField] private AudioMixer mixer;
+	[SerializeField] private AudioControl musicControl;
+	[SerializeField] private AudioControl sfxControl;
+	[SerializeField] private string musicVolName;
+	[SerializeField] private string sfxVolName;
+
     public void Start()
+    {
+        LoadLevels();
+
+        if (PlayerPrefs.GetString("currentUI") == "LevelMenu")
+        {
+            mainMenu.gameObject.SetActive(false);
+            levelMenu.SetActive(true);
+        } else if (PlayerPrefs.GetString("currentUI") == "MainMenu")
+        {
+            levelMenu.SetActive(false);
+            mainMenu.gameObject.SetActive(true);
+        }
+
+        musicControl.Setup(mixer, musicVolName);
+		sfxControl.Setup(mixer, sfxVolName);
+    }
+
+    public void CloseOptions()
+    {
+        mainMenu.gameObject.SetActive(true);
+        optionsMenu.SetActive(false);
+        musicControl.Save();
+		sfxControl.Save();
+    }
+
+    public void OpenLevelMenu()
+    {
+        mainMenu.gameObject.SetActive(false);
+        levelMenu.SetActive(true);
+        PlayerPrefs.SetString("currentUI", "LevelMenu");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void StartLevel(int level)
+    {
+        LevelLoader.Current.LoadScene("LevelTemplate", level);
+    }
+
+    private void LoadLevels()
     {
         int i = 1;
         foreach (RectTransform levelIcon in levelMenu.transform.GetChild(0).GetChild(1).transform)
@@ -50,31 +103,5 @@ public class MainMenu : MonoBehaviour
             }
             i++;
         }
-        if (PlayerPrefs.GetString("currentUI") == "LevelMenu")
-        {
-            mainMenu.gameObject.SetActive(false);
-            levelMenu.SetActive(true);
-        } else if (PlayerPrefs.GetString("currentUI") == "MainMenu")
-        {
-            levelMenu.SetActive(false);
-            mainMenu.gameObject.SetActive(true);
-        }
-    }
-
-    public void OpenLevelMenu()
-    {
-        mainMenu.gameObject.SetActive(false);
-        levelMenu.SetActive(true);
-        PlayerPrefs.SetString("currentUI", "LevelMenu");
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    public void StartLevel(int level)
-    {
-        LevelLoader.Current.LoadScene("LevelTemplate", level);
     }
 }

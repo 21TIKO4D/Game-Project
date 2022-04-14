@@ -31,7 +31,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1213873246208
-    m_Localized: VOLUME
+    m_Localized: Music
     m_Metadata:
       m_Items: []
   - m_Id: 4204319723520
@@ -56,6 +56,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2648354474135552
     m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3300103899811840
+    m_Localized: Effects
     m_Metadata:
       m_Items: []
   references:
