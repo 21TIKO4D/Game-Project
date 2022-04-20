@@ -6578,10 +6578,6 @@ PrefabInstance:
       value: ClickAudio
       objectReference: {fileID: 0}
     - target: {fileID: 6500385717471686113, guid: 19185292b220b904c95a4f9f52eba0e0, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 99348d26b121bdf40bca2ff30b000207, type: 3}
-    - target: {fileID: 6500385717471686113, guid: 19185292b220b904c95a4f9f52eba0e0, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.size
       value: 8
       objectReference: {fileID: 0}
