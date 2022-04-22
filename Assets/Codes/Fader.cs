@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Fader : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class Fader : MonoBehaviour
 			case FadeState.FadeOut:
 				bgColor.a = Mathf.Clamp01(bgColor.a - Time.unscaledDeltaTime * speed); // Pidetään arvo aina välillä [0,1]
 				background.color = bgColor;
+				background.transform.GetChild(0).GetComponent<TMP_Text>().color = bgColor;
 
 				if (bgColor.a == 0)
 				{

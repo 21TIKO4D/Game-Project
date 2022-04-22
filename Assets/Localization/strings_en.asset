@@ -62,5 +62,9 @@ MonoBehaviour:
     m_Localized: Effects
     m_Metadata:
       m_Items: []
+  - m_Id: 6205612004970496
+    m_Localized: Loading...
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
