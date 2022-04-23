@@ -301,6 +301,7 @@ MonoBehaviour:
   tileMapGrid: {fileID: 7628902703843467879}
   animalUIPrefabs:
   - {fileID: 5331560552763428465, guid: afcf88e5cd24ef14cba31c2be8d58713, type: 3}
+  - {fileID: 5413529946053781468, guid: 30fbfef9a027b194a916772b02e21d99, type: 3}
   - {fileID: 5413529946053781468, guid: d88569a4b23592b40be5c7590ede7f6d, type: 3}
   animals: {fileID: 1776438219576294441}
   trainManager: {fileID: 0}

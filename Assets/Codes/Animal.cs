@@ -2,17 +2,6 @@
 
 public class Animal : MonoBehaviour
 {
-    public enum AnimalType
-    {
-        Cow,
-        Sheep
-    }
-
-    public AnimalType Type
-    {
-        get;
-    }
-
     public TrainManager TrainManager
     {
         get;
