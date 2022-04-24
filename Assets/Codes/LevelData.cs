@@ -50,7 +50,8 @@ public class LevelData : MonoBehaviour
                     {
                         if (obj.name == "Grid")
                         {
-                            Instantiate(obj.transform.GetChild(0), Vector3.zero, Quaternion.identity, trainManager.gameManager.tileMapGrid.transform);
+                            Transform obs = Instantiate(obj.transform.GetChild(0), Vector3.zero, Quaternion.identity, trainManager.gameManager.tileMapGrid.transform);
+                            obs.transform.position = obj.transform.GetChild(0).transform.position;
                             LocomotivePosition = obj.transform.GetChild(1);
                             Station = obj.transform.GetChild(2).gameObject;
                         } else
