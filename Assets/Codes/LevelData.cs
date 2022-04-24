@@ -6,9 +6,27 @@ using UnityEngine.SceneManagement;
 public class LevelData : MonoBehaviour
 {
     public Grid tileMap;
-    public Transform locomotivePosition;
 
-    public Transform stationPosition;
+    private GameObject station;
+    private Transform locomotivePosition;
+
+    public Transform LocomotivePosition {
+        get {
+            return locomotivePosition;
+        }
+        private set {
+            locomotivePosition = value;
+        }
+    }
+
+    public GameObject Station {
+        get {
+            return station;
+        }
+        private set {
+            station = value;
+        }
+    }
 
     public void LoadData(TrainManager trainManager)
     {
@@ -33,6 +51,8 @@ public class LevelData : MonoBehaviour
                         if (obj.name == "Grid")
                         {
                             Instantiate(obj.transform.GetChild(0), Vector3.zero, Quaternion.identity, trainManager.gameManager.tileMapGrid.transform);
+                            LocomotivePosition = obj.transform.GetChild(1);
+                            Station = obj.transform.GetChild(2).gameObject;
                         } else
                         {
                             GameObject animal = Instantiate(obj.gameObject, obj.position, obj.rotation, animalsObj.transform);

@@ -17,6 +17,9 @@ public class TrainManager : MonoBehaviour
     [SerializeField]
     private GameObject trainCarPrefab;
 
+    [SerializeField]
+    private GameObject station;
+
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
     private float fuelMultiplier = 1.2f;
@@ -38,8 +41,17 @@ public class TrainManager : MonoBehaviour
         mainCamera = Camera.main;
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
         fuelBar.SetMaxFuel(50);
-        
-        LevelLoader.Current.transform.GetChild(0).GetComponent<LevelData>().LoadData(this);
+
+        LevelData levelData = LevelLoader.Current.transform.GetChild(0).GetComponent<LevelData>();
+        levelData.LoadData(this);
+
+        locomotive.transform.position = levelData.LocomotivePosition.position;
+        locomotive.transform.rotation = levelData.LocomotivePosition.rotation;
+
+        station.transform.position = levelData.Station.transform.position;
+        station.transform.rotation = levelData.Station.transform.rotation;
+        station.GetComponent<SpriteRenderer>().sprite = levelData.Station.GetComponent<SpriteRenderer>().sprite;
+
         gameManager.LevelStart(this);
         inventory = new Inventory(collectedAnimalsUI, gameManager);
     }
@@ -162,8 +174,8 @@ public class TrainManager : MonoBehaviour
                 Vector2 spawnPoint;
                 do
                 {
-                    float x = Random.Range(-27.0f, 27.0f);
-                    float y = Random.Range(-16.0f, 16.0f);
+                    float x = Random.Range(-29.0f, 25.5f);
+                    float y = Random.Range(-16.0f, 17.0f);
                     spawnPoint = new Vector2(x, y);
                 } while (Physics2D.OverlapCircle(spawnPoint, 2.2f, LayerMask.GetMask("Obstacle")));
 
