@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 4fb817deff6a70e438ab0a9d7ccf1d2f
@@ -17,9 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelTemplate.unity
     guid: a143a39bb0b77614ba2e56b218430fbd
-  - enabled: 0
-    path: Assets/Scenes/GameScene.unity
-    guid: 32e001314026ee2438f597a29d2bec19
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: f0bb5e3242bdb7845b0f7e812da19b74, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: f177708fdd9b3454fb3f2fff0932cf92, type: 2}
