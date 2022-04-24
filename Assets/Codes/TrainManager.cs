@@ -52,6 +52,7 @@ public class TrainManager : MonoBehaviour
         station.GetComponent<SpriteRenderer>().sprite = levelData.Station.GetComponent<SpriteRenderer>().sprite;
 
         gameManager.LevelStart(this);
+        mainCamera.transform.rotation = locomotive.transform.rotation;
         inventory = new Inventory(collectedAnimalsUI, gameManager);
     }
 

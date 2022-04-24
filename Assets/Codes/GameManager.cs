@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
                     case "Cow": Instantiate(animalUIPrefabs[0], trainManager.collectedAnimalsUI.transform); break;
                     case "Horse": Instantiate(animalUIPrefabs[1], trainManager.collectedAnimalsUI.transform); break;
                     case "Sheep": Instantiate(animalUIPrefabs[2], trainManager.collectedAnimalsUI.transform); break;
+                    case "Chicken": Instantiate(animalUIPrefabs[3], trainManager.collectedAnimalsUI.transform); break;
                 }
             }
             animalsCount[animal.name] = animalsCount[animal.name] + 1;

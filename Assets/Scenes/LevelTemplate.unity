@@ -303,6 +303,7 @@ MonoBehaviour:
   - {fileID: 5331560552763428465, guid: afcf88e5cd24ef14cba31c2be8d58713, type: 3}
   - {fileID: 5413529946053781468, guid: 30fbfef9a027b194a916772b02e21d99, type: 3}
   - {fileID: 5413529946053781468, guid: d88569a4b23592b40be5c7590ede7f6d, type: 3}
+  - {fileID: 5413529946053781468, guid: d1318864e0d27514bb4290539f3f0d29, type: 3}
   animals: {fileID: 1776438219576294441}
   trainManager: {fileID: 0}
 --- !u!4 &34070738
@@ -3892,8 +3893,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 49, y: -87}
-  m_SizeDelta: {x: 900, y: 100}
+  m_AnchoredPosition: {x: 153.1, y: -87}
+  m_SizeDelta: {x: 1108.1, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1245925939
 MonoBehaviour:
@@ -3915,7 +3916,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 100}
+  m_CellSize: {x: 275, y: 100}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
