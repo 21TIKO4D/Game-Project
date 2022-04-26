@@ -19,6 +19,15 @@ public class TrainManager : MonoBehaviour
     [SerializeField]
     private GameObject station;
 
+    [SerializeField]
+    private Sprite locomotiveTurningLeft;
+
+    [SerializeField]
+    private Sprite locomotiveSprite;
+
+    [SerializeField]
+    private Sprite locomotiveTurningRight;
+
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
     private float fuelMultiplier = 1.2f;
@@ -29,6 +38,7 @@ public class TrainManager : MonoBehaviour
     private List<GameObject> trainCars = new List<GameObject>();
     private Camera mainCamera;
     private Inventory inventory;
+    private SpriteRenderer locomotiveSpriteRenderer;
     private Vector2 movement;
     private Vector3 camTargetPosition;
     private Vector3 velocity;
@@ -36,6 +46,7 @@ public class TrainManager : MonoBehaviour
     private void Start()
     {
         locomotive = this.gameObject;
+        locomotiveSpriteRenderer = locomotive.transform.GetChild(0).GetComponent<SpriteRenderer>();
         markerList.Clear();
         mainCamera = Camera.main;
         markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
@@ -53,6 +64,7 @@ public class TrainManager : MonoBehaviour
 
         gameManager.LevelStart(this);
         mainCamera.transform.rotation = locomotive.transform.rotation;
+        locomotiveSpriteRenderer.sprite = locomotiveSprite;
         inventory = new Inventory(collectedAnimalsUI, gameManager);
     }
 
@@ -82,6 +94,7 @@ public class TrainManager : MonoBehaviour
     public void OnUIArrowPointerClick(float horizontal)
     {
         moveInputHorizontal += horizontal;
+        locomotiveSpriteRenderer.sprite = moveInputHorizontal < 0 ? locomotiveTurningLeft : moveInputHorizontal > 0 ? locomotiveTurningRight : locomotiveSprite;
     }
 
     public void ClearAnimals()

@@ -19425,9 +19425,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 34070737}
     - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: locomotiveSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b31d28ddd05646409de2c441f61d19f, type: 3}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: collectedAnimalsUI
       value: 
       objectReference: {fileID: 1245925937}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: locomotiveTurningLeft
+      value: 
+      objectReference: {fileID: 21300000, guid: b6230a70ab3fecf4e930f805bf67d928, type: 3}
+    - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
+      propertyPath: locomotiveTurningRight
+      value: 
+      objectReference: {fileID: 21300000, guid: 759194bd827ea1b4298b71698a2f16a6, type: 3}
     - target: {fileID: 8318276038991095113, guid: 4d2899ae956e1e6478d8725d58e9bdd5, type: 3}
       propertyPath: animalPrefabs.Array.size
       value: 2
