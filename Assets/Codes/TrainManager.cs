@@ -6,7 +6,7 @@ public class TrainManager : MonoBehaviour
     [SerializeField] 
     private float speed = 280;
     [SerializeField] 
-    private float turnSpeed = 170;
+    private float turnSpeed = 165;
     public FuelBar fuelBar;
     public GameObject collectedAnimalsUI;
     [SerializeField]
@@ -30,7 +30,7 @@ public class TrainManager : MonoBehaviour
 
     private float cameraZoomsLeft = 0f;
     private float backwardDistance = 0f;
-    private float fuelMultiplier = 1.2f;
+    private float fuelMultiplier = 1.15f;
     private float moveInputHorizontal;
     private int markersBetweenParts = 19;
     private Dictionary<string, int> collectedAnimals = new Dictionary<string, int>();
@@ -99,25 +99,30 @@ public class TrainManager : MonoBehaviour
 
     public void ClearAnimals()
     {
-        for (int i = 0; i < trainCars.Count; i++)
+        if (trainCars.Count > 0)
         {
-            GameObject trainCar = trainCars[i];
-            string animalName = trainCar.name;
-            inventory.UpdateAnimalCountsToUI(animalName);
-            if (!collectedAnimals.ContainsKey(animalName))
+            collectedAnimals.Clear();
+            for (int i = 0; i < trainCars.Count; i++)
             {
-                collectedAnimals.Add(animalName, 1);
+                GameObject trainCar = trainCars[i];
+                string animalName = trainCar.name;
+                inventory.UpdateAnimalCountsToUI(animalName);
+                if (!collectedAnimals.ContainsKey(animalName))
+                {
+                    collectedAnimals.Add(animalName, 1);
+                }
+                else
+                {
+                    collectedAnimals[animalName]++;
+                }
+                Destroy(trainCar);
             }
-            else
-            {
-                collectedAnimals[animalName]++;
-            }
-            Destroy(trainCar);
+            
+            gameManager.CheckAnimalCount(collectedAnimals);
+            EmptyTrain();
+            trainCars.Clear();
+            gameManager.transform.GetChild(0).GetComponent<AudioSource>().Play();
         }
-        
-        gameManager.CheckAnimalCount(collectedAnimals);
-        EmptyTrain();
-        trainCars.Clear();
     }
 
     public void Grow(string collectedName)
@@ -126,7 +131,17 @@ public class TrainManager : MonoBehaviour
         trainCar.name = collectedName;
         trainCars.Add(trainCar);
         cameraZoomsLeft = 0.35f;
-        fuelMultiplier += 0.25f;
+        fuelMultiplier += 0.2f;
+    }
+
+    public void Pause()
+    {
+        locomotive.transform.GetChild(0).GetComponent<AudioSource>().Pause();
+    }
+
+    public void Resume()
+    {
+        locomotive.transform.GetChild(0).GetComponent<AudioSource>().UnPause();
     }
 
     private void EmptyTrain()

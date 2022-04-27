@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
     public void BackToMainMenu()
     {
         LevelLoader.Current.LoadScene("Menu");
+        StartCoroutine(StartFade(this.GetComponent<AudioSource>(), 0.3f, 0));
     }
 
     public void CheckAnimalCount(Dictionary<string, int> collectedAnimals)
@@ -68,25 +70,31 @@ public class GameManager : MonoBehaviour
         if (completed)
         {
             GameEnd(true);
+        } else
+        {
+            
         }
     }
 
     public void GameEnd(bool completed)
     {
         IsPaused = true;
+        StartCoroutine(StartFade(this.GetComponent<AudioSource>(), 0.45f, 0.15f));
         if (completed)
         {
             int stars = 1;
             float fuelValue = trainManager.fuelBar.slider.normalizedValue;
-            if (fuelValue >= 0.45)
+            if (fuelValue >= 0.40)
             {
                 stars = 3;
             } else if (fuelValue >= 0.15) 
             {
                 stars = 2;
             }
-            gameEndUI.transform.GetChild(0).gameObject.SetActive(true);
-            gameEndUI.transform.GetChild(0).GetChild(stars).gameObject.SetActive(true);
+            Transform completedUI = gameEndUI.transform.GetChild(0);
+
+            completedUI.gameObject.SetActive(true);
+            completedUI.GetChild(stars).gameObject.SetActive(true);
             if (stars > PlayerPrefs.GetInt("Level" + LevelLoader.Current.currentLevel, 0))
             {
                 PlayerPrefs.SetInt("Level" + LevelLoader.Current.currentLevel, stars);
@@ -111,6 +119,7 @@ public class GameManager : MonoBehaviour
 
         pauseMenuUI.SetActive(true);
         IsPaused = true;
+        trainManager.Pause();
     }
 
     public void RestartLevel()
@@ -122,5 +131,19 @@ public class GameManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         IsPaused = false;
+        trainManager.Resume();
+    }
+
+    public static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
+    {
+        float currentTime = 0;
+        float start = audioSource.volume;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        yield break;
     }
 }
