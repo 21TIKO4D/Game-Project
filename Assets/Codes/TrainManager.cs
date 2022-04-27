@@ -42,6 +42,7 @@ public class TrainManager : MonoBehaviour
     private Vector2 movement;
     private Vector3 camTargetPosition;
     private Vector3 velocity;
+    private bool goingBackwards = false;
 
     private void Start()
     {
@@ -94,7 +95,23 @@ public class TrainManager : MonoBehaviour
     public void OnUIArrowPointerClick(float horizontal)
     {
         moveInputHorizontal += horizontal;
-        locomotiveSpriteRenderer.sprite = moveInputHorizontal < 0 ? locomotiveTurningLeft : moveInputHorizontal > 0 ? locomotiveTurningRight : locomotiveSprite;
+        UpdateLocomotiveSprite();
+    }
+
+    private void UpdateLocomotiveSprite()
+    {
+        if (moveInputHorizontal > 0)
+        {
+            locomotiveSpriteRenderer.sprite = backwardDistance > 0.01f ? locomotiveTurningLeft : locomotiveTurningRight;
+        }
+        else if (moveInputHorizontal < 0)
+        {
+            locomotiveSpriteRenderer.sprite = backwardDistance > 0.01f ? locomotiveTurningRight : locomotiveTurningLeft;
+        }
+        else
+        {
+            locomotiveSpriteRenderer.sprite = locomotiveSprite;
+        }
     }
 
     public void ClearAnimals()
@@ -159,10 +176,16 @@ public class TrainManager : MonoBehaviour
         }
         if (backwardDistance >= 0.01f)
         {
+            goingBackwards = true;
             movement = -locomotive.transform.up * (speed * 0.65f) * Time.deltaTime;
             backwardDistance -= movement.normalized.magnitude / 2;
         } else
         {
+            if (goingBackwards) 
+            {
+                UpdateLocomotiveSprite();
+                goingBackwards = false;
+            }
             movement = locomotive.transform.up * speed * Time.deltaTime;
         }
         locomotive.GetComponent<Rigidbody2D>().velocity = movement;
@@ -187,6 +210,7 @@ public class TrainManager : MonoBehaviour
     {
         backwardDistance = 15f;
         SummonAnimalAndDestroyCar();
+        UpdateLocomotiveSprite();
     }
 
     private void SummonAnimalAndDestroyCar()
