@@ -118,7 +118,6 @@ public class TrainManager : MonoBehaviour
     {
         if (trainCars.Count > 0)
         {
-            collectedAnimals.Clear();
             for (int i = 0; i < trainCars.Count; i++)
             {
                 GameObject trainCar = trainCars[i];
@@ -151,12 +150,12 @@ public class TrainManager : MonoBehaviour
         fuelMultiplier += 0.2f;
     }
 
-    public void Pause()
+    public void PauseLocomotiveSound()
     {
         locomotive.transform.GetChild(0).GetComponent<AudioSource>().Pause();
     }
 
-    public void Resume()
+    public void ResumeLocomotiveSound()
     {
         locomotive.transform.GetChild(0).GetComponent<AudioSource>().UnPause();
     }
@@ -229,7 +228,7 @@ public class TrainManager : MonoBehaviour
                     float x = Random.Range(-29.0f, 25.5f);
                     float y = Random.Range(-16.0f, 17.0f);
                     spawnPoint = new Vector2(x, y);
-                } while (Physics2D.OverlapCircle(spawnPoint, 2.2f, LayerMask.GetMask("Obstacle")));
+                } while (Physics2D.OverlapCircle(spawnPoint, 2.5f, LayerMask.GetMask("Obstacle")));
 
                 trainCars.RemoveAt(0);
 

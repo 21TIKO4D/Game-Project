@@ -58,7 +58,7 @@ public class Animal : MonoBehaviour
                 delay = audio.clip.length;
             }
             this.GetComponent<CapsuleCollider2D>().enabled = false;
-            this.GetComponent<Renderer>().enabled = false;
+            transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             Destroy(this.gameObject, delay);
         }
     }

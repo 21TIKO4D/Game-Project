@@ -70,15 +70,13 @@ public class GameManager : MonoBehaviour
         if (completed)
         {
             GameEnd(true);
-        } else
-        {
-            
         }
     }
 
     public void GameEnd(bool completed)
     {
         IsPaused = true;
+        trainManager.PauseLocomotiveSound();
         StartCoroutine(StartFade(this.GetComponent<AudioSource>(), 0.45f, 0.15f));
         if (completed)
         {
@@ -119,7 +117,8 @@ public class GameManager : MonoBehaviour
 
         pauseMenuUI.SetActive(true);
         IsPaused = true;
-        trainManager.Pause();
+        trainManager.PauseLocomotiveSound();
+        GetComponent<AudioSource>().Pause();
     }
 
     public void RestartLevel()
@@ -131,7 +130,8 @@ public class GameManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         IsPaused = false;
-        trainManager.Resume();
+        trainManager.ResumeLocomotiveSound();
+        GetComponent<AudioSource>().UnPause();
     }
 
     public static IEnumerator StartFade(AudioSource audioSource, float duration, float targetVolume)
