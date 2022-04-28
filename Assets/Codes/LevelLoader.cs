@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,11 +9,11 @@ public class LevelLoader : MonoBehaviour
 		None,
 		Started,
 		InProgress,
-		Options
+		Tutorial
 	}
 
 	public const string LoaderName = "Loader";
-	public const string OptionsName = "Options";
+	public const string TutorialName = "Tutorial";
 
 	public static LevelLoader Current
 	{
@@ -30,7 +28,7 @@ public class LevelLoader : MonoBehaviour
 	private LoadingState state = LoadingState.None;
 	private Scene originalScene;
 	private Scene loadingScene;
-	private Scene optionsScene;
+	private Scene tutorialScene;
 
 	// Nk. Singleton, eli tästä oliosta voi olla vain yksi kopio olemassa kerralla
 	private void Awake()
@@ -64,19 +62,19 @@ public class LevelLoader : MonoBehaviour
 		SceneManager.sceneLoaded -= OnLevelLoaded;
 	}
 
-	public void LoadOptions()
+	public void LoadTutorial()
 	{
 		// Pysäytä peli
 		Time.timeScale = 0;
-		state = LoadingState.Options;
-		SceneManager.LoadSceneAsync(OptionsName, LoadSceneMode.Additive);
+		state = LoadingState.Tutorial;
+		SceneManager.LoadSceneAsync(TutorialName, LoadSceneMode.Additive);
 	}
 
-	public void CloseOptions()
+	public void CloseTutorial()
 	{
 		state = LoadingState.None;
-		SceneManager.UnloadSceneAsync(optionsScene);
-		Time.timeScale = 1; // Palauta pelin normaalinopeus
+		SceneManager.UnloadSceneAsync(tutorialScene);
+		Time.timeScale = 1;
 	}
 
 	public void LoadScene(string sceneName)
@@ -116,8 +114,8 @@ public class LevelLoader : MonoBehaviour
 
 				state = LoadingState.None;
 				break;
-			case LoadingState.Options:
-				optionsScene = scene;
+			case LoadingState.Tutorial:
+				tutorialScene = scene;
 				break;
 		}
 	}
@@ -133,9 +131,6 @@ public class LevelLoader : MonoBehaviour
 	{
 		yield return new WaitForSeconds(waitTime); // Odottaa waitTime:n verran
 
-		// Suoritus jatkuu waitTime:n kuluttua
-		// Näyttö on musta, joten pelaaja ei enää näe alkuperäistä sceneä.
-		// Unloadataan se
 		SceneManager.UnloadSceneAsync(originalScene);
 		if (nextSceneName.Equals("Menu"))
 		{
