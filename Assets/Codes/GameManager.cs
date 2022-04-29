@@ -90,6 +90,10 @@ public class GameManager : MonoBehaviour
             }
             Transform completedUI = gameEndUI.transform.GetChild(0);
 
+            if (LevelLoader.Current.currentLevel == LevelLoader.Current.transform.childCount)
+            {
+                completedUI.GetChild(0).gameObject.SetActive(false);
+            }
             completedUI.gameObject.SetActive(true);
             completedUI.GetChild(stars).gameObject.SetActive(true);
             if (stars > PlayerPrefs.GetInt("Level" + LevelLoader.Current.currentLevel, 0))
@@ -107,7 +111,8 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
 	{
         LevelLoader.Current.currentLevel++;
-		LevelLoader.Current.LoadScene("LevelTemplate", LevelLoader.Current.currentLevel);
+        LevelLoader.Current.LoadScene("LevelTemplate", LevelLoader.Current.currentLevel);
+
 	}
     
     public void Pause()
