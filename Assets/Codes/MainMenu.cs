@@ -56,8 +56,6 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.gameObject.SetActive(true);
         optionsMenu.SetActive(false);
-        musicControl.Save();
-		sfxControl.Save();
     }
 
     public void OpenLevelMenu()

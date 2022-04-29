@@ -334,13 +334,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -189968357297864851, guid: 44446f459f063394ab41e71299c7cdf5, type: 2}
   m_audioClip: {fileID: 8300000, guid: 5df8754ef4bdfc2428a8f750fa39c934, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.55
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 64
+  Priority: 128
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -17637,7 +17637,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1837961325046437452, guid: 44446f459f063394ab41e71299c7cdf5, type: 2}
   m_audioClip: {fileID: 8300000, guid: fc4f00f2a9bcbc34da43d6f0b7823dd8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -19751,7 +19751,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6104293900769281294, guid: a20ea67b69b1572478630ab80ef547fd, type: 3}
       propertyPath: Priority
-      value: 256
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104293900769281294, guid: a20ea67b69b1572478630ab80ef547fd, type: 3}
+      propertyPath: m_Volume
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 6104293900769281294, guid: a20ea67b69b1572478630ab80ef547fd, type: 3}
       propertyPath: OutputAudioMixerGroup

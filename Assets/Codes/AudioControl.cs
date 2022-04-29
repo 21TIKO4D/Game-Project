@@ -17,9 +17,10 @@ public class AudioControl : MonoBehaviour
         {
             slider.value = ToLinear(volume);
         }
+        slider.onValueChanged.AddListener(delegate { OnValueChanged(slider); });
     }
 
-    public void Save()
+    private void OnValueChanged(Slider slider)
     {
         mixer.SetFloat(volumeName, ToDB(slider.value));
     }
