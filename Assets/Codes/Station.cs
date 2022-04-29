@@ -6,15 +6,20 @@ public class Station : MonoBehaviour
     TrainManager trainManager;
 
     [SerializeField]
-	private float speed = 1;
+	private float speed = 1.5f;
 
     bool glow = false;
     private Color newColor;
+
+    private SpriteRenderer glowObject;
+    private SpriteRenderer glowObject2;
 
     private void Start()
     {
         newColor = transform.GetChild(0).GetComponent<SpriteRenderer>().color;
         newColor.a = 0;
+        glowObject = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        glowObject2 = transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -36,8 +41,8 @@ public class Station : MonoBehaviour
             }
         }
         newColor.a = alpha;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().color = newColor;
-        transform.GetChild(1).GetComponent<SpriteRenderer>().color = newColor;
+        glowObject.color = newColor;
+        glowObject2.color = newColor;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

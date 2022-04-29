@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
     public void BackToMainMenu()
     {
         LevelLoader.Current.LoadScene("Menu");
-        StartCoroutine(StartFade(this.GetComponent<AudioSource>(), 0.3f, 0));
     }
 
     public void CheckAnimalCount(Dictionary<string, int> collectedAnimals)
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         IsPaused = true;
         trainManager.PauseLocomotiveSound();
-        StartCoroutine(StartFade(this.GetComponent<AudioSource>(), 0.45f, 0.15f));
+        StartCoroutine(StartFade(this.GetComponent<AudioSource>(), 0.3f, 0));
         if (completed)
         {
             int stars = 1;

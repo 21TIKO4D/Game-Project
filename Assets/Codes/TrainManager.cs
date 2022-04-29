@@ -38,6 +38,7 @@ public class TrainManager : MonoBehaviour
     private List<GameObject> trainCars = new List<GameObject>();
     private Camera mainCamera;
     private Inventory inventory;
+    private Rigidbody2D locomotiveRb;
     private SpriteRenderer locomotiveSpriteRenderer;
     private Vector2 movement;
     private Vector3 camTargetPosition;
@@ -48,10 +49,22 @@ public class TrainManager : MonoBehaviour
     {
         locomotive = this.gameObject;
         locomotiveSpriteRenderer = locomotive.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        locomotiveRb = locomotive.GetComponent<Rigidbody2D>();
         markerList.Clear();
         mainCamera = Camera.main;
-        markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
-        fuelBar.SetMaxFuel(50);
+        markerList.Add(new Marker(locomotive.transform));
+        int startFuel = 50;
+        if (LevelLoader.Current.currentLevel > 9)
+        {
+            startFuel = 68;
+        } else if (LevelLoader.Current.currentLevel > 8)
+        {
+            startFuel = 65;
+        } else if (LevelLoader.Current.currentLevel > 7)
+        {
+            startFuel = 56;
+        }
+        fuelBar.SetMaxFuel(startFuel);
 
         LevelData levelData = LevelLoader.Current.transform.GetChild(0).GetComponent<LevelData>();
         levelData.LoadData(this);
@@ -73,7 +86,7 @@ public class TrainManager : MonoBehaviour
     {
         if (gameManager.IsPaused)
         {
-            locomotive.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            locomotiveRb.velocity = Vector3.zero;
             return;
         }
         TrainMovement();
@@ -88,7 +101,7 @@ public class TrainManager : MonoBehaviour
             {
                 markerList.Remove(markerList[0]);
             }
-            markerList.Add(new Marker(locomotive.transform.position, locomotive.transform.rotation));
+            markerList.Add(new Marker(locomotive.transform));
         }
     }
 
@@ -187,14 +200,14 @@ public class TrainManager : MonoBehaviour
             }
             movement = locomotive.transform.up * speed * Time.deltaTime;
         }
-        locomotive.GetComponent<Rigidbody2D>().velocity = movement;
+        locomotiveRb.velocity = movement;
         fuelBar.DecreaseFuel(movement.sqrMagnitude * Time.deltaTime / 40 * fuelMultiplier);
         if (fuelBar.Value <= 0)
         {
             gameManager.GameEnd(false);
         }
         
-        camTargetPosition = locomotive.GetComponent<Transform>().TransformPoint(new Vector3(0, 2f, -10));
+        camTargetPosition = locomotive.transform.TransformPoint(new Vector3(0, 2f, -10));
         mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, camTargetPosition, ref velocity, Time.deltaTime);
 
         for (int i = 0; i < trainCars.Count; i++)
@@ -263,10 +276,10 @@ public class TrainManager : MonoBehaviour
         public Vector3 position;
         public Quaternion rotation;
 
-        public Marker(Vector3 pos, Quaternion rot)
+        public Marker(Transform transform)
         {
-            position = pos;
-            rotation = rot;
+            position = transform.position;
+            rotation = transform.rotation;
         }
     }
 }

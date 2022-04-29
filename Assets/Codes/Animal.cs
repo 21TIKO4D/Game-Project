@@ -14,7 +14,7 @@ public class Animal : MonoBehaviour
         TURN
     }
     private State state;
-    private float timer = 3;
+    private float timer = 2.5f;
 
     private float multiplier = 1;
 
@@ -27,19 +27,19 @@ public class Animal : MonoBehaviour
             if (state == State.IDLE)
             {
                 state = State.TURN;
-                timer = 1f;
+                timer = 0.9f;
                 multiplier = Random.Range(0, 4) < 2 ? -1 : 1;
             } else
             {
                 state = State.IDLE;
-                timer = 7 + Random.Range(-1.5f, 1.5f);
+                timer = 6.5f + Random.Range(-1f, 1.5f);
             }
         }
         switch (state)
         {
             case State.TURN:
                 Vector3 rotation = transform.eulerAngles;
-                float value = timer > 0.2 ? 0.23f : 0.15f;
+                float value = timer > 0.2 ? 0.15f : 0.1f;
                 rotation.z += multiplier * value;
                 transform.rotation = Quaternion.Euler(rotation);
                 break;

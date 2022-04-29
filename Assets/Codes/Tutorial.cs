@@ -12,17 +12,10 @@ public class Tutorial : MonoBehaviour
         LevelLoader.Current.CloseTutorial();
     }
 
-    public void NextPage()
+    public void ChangePage(int value)
     {
         pages.transform.GetChild(currentPage - 1).gameObject.SetActive(false);
-        currentPage++;
-        pages.transform.GetChild(currentPage - 1).gameObject.SetActive(true);
-    }
-
-    public void PreviousPage()
-    {
-        pages.transform.GetChild(currentPage - 1).gameObject.SetActive(false);
-        currentPage--;
+        currentPage += value;
         pages.transform.GetChild(currentPage - 1).gameObject.SetActive(true);
     }
 }
