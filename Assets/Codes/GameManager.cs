@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
             if (LevelLoader.Current.currentLevel == LevelLoader.Current.transform.childCount)
             {
-                completedUI.GetChild(0).gameObject.SetActive(false);
+                completedUI.GetChild(4).gameObject.SetActive(false);
             }
             completedUI.gameObject.SetActive(true);
             completedUI.GetChild(stars).gameObject.SetActive(true);
