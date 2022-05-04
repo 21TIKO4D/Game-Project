@@ -80,6 +80,10 @@ public class TrainManager : MonoBehaviour
         mainCamera.transform.rotation = locomotive.transform.rotation;
         locomotiveSpriteRenderer.sprite = locomotiveSprite;
         inventory = new Inventory(collectedAnimalsUI, gameManager);
+        if (PlayerPrefs.GetInt("Level" + LevelLoader.Current.currentLevel, -1) == -1)
+        {
+            LevelLoader.Current.LoadTutorial();
+        }
     }
 
     private void FixedUpdate()

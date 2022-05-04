@@ -67,6 +67,10 @@ MonoBehaviour:
     m_Key: Game name
     m_Metadata:
       m_Items: []
+  - m_Id: 10686606384795648
+    m_Key: Tutorial
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

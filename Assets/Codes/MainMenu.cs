@@ -65,6 +65,11 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetString("currentUI", "LevelMenu");
     }
 
+    public void OpenTutorial()
+    {
+        LevelLoader.Current.LoadTutorial();
+    }
+
     public void QuitGame()
     {
         Application.Quit();
