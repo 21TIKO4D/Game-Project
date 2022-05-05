@@ -74,5 +74,22 @@ MonoBehaviour:
     m_Localized: TUTORIAL
     m_Metadata:
       m_Items: []
+  - m_Id: 10941263933837312
+    m_Localized: Collect animals on the train.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10942852232876032
+    m_Localized: If you collide with the obstacle, the collected animals will escape
+      and you will have to collect them again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10943211995107328
+    m_Localized: Take the collected animals to the station.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10943225387520000
+    m_Localized: The number of train cars affects fuel consumption.
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

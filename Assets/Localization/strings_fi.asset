@@ -74,5 +74,22 @@ MonoBehaviour:
     m_Localized: TUTORIAALI
     m_Metadata:
       m_Items: []
+  - m_Id: 10941263933837312
+    m_Localized: "Ker\xE4\xE4 el\xE4imet junalla."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10942852232876032
+    m_Localized: "Jos t\xF6rm\xE4\xE4t esteeseen, ker\xE4tyt el\xE4imet pakenevat
+      ja sinun on ker\xE4tt\xE4v\xE4 ne uudelleen."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10943211995107328
+    m_Localized: "Vie ker\xE4tyt el\xE4imet asemalle."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10943225387520000
+    m_Localized: "Junan vaunujen m\xE4\xE4r\xE4 vaikuttaa polttoaineenkulutukseen."
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

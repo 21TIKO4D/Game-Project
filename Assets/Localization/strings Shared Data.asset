@@ -71,6 +71,22 @@ MonoBehaviour:
     m_Key: Tutorial
     m_Metadata:
       m_Items: []
+  - m_Id: 10941263933837312
+    m_Key: Tutorial collect animals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10942852232876032
+    m_Key: Tutorial obstacles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10943211995107328
+    m_Key: Tutorial station
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10943225387520000
+    m_Key: Tutorial fuel consumption
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
